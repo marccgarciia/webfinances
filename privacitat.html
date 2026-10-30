@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de privacitat · Finances</title>
+  <meta name="description" content="Política de privacitat de Finances: no tenim registre ni servidor, les teves dades es queden a l'iPhone. Com tractem el poc que rebem segons el RGPD." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://financesapp.es/privacitat.html" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    };
+    (function () {
+      var saved = localStorage.getItem('landing-theme');
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else if (saved === 'light') document.documentElement.classList.remove('dark');
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .legal h2 { font-size: 1.5rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; color: rgb(17 24 39); letter-spacing: -0.02em; }
+    .dark .legal h2 { color: rgb(255 255 255); }
+    .legal h3 { font-size: 1.1rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem; color: rgb(55 65 81); }
+    .dark .legal h3 { color: rgb(229 231 235); }
+    .legal p, .legal li { color: rgb(75 85 99); line-height: 1.7; margin-bottom: 0.75rem; }
+    .dark .legal p, .dark .legal li { color: rgba(255,255,255,0.6); }
+    .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal ul { list-style: disc; }
+    .legal ol { list-style: decimal; }
+    .legal a { color: rgb(59 130 246); text-decoration: underline; }
+    .legal strong { color: rgb(31 41 55); font-weight: 600; }
+    .dark .legal strong { color: rgba(255,255,255,0.85); }
+    .legal table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .legal th, .legal td { padding: 0.6rem 0.8rem; border: 1px solid rgb(229 231 235); text-align: left; font-size: 0.875rem; }
+    .dark .legal th, .dark .legal td { border-color: rgba(255,255,255,0.08); }
+    .legal th { background: rgb(249 250 251); font-weight: 600; color: rgb(55 65 81); }
+    .dark .legal th { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.7); }
+    .lp { position:relative; display:inline-block; }
+    .lp-trigger { display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; font-size:11px; font-weight:600; color:#6b7280; padding:4px 8px; border-radius:8px; letter-spacing:0.04em; text-transform:uppercase; transition:all 0.15s; }
+    .dark .lp-trigger { color:rgba(255,255,255,0.35); }
+    .lp-trigger:hover { background:rgba(0,0,0,0.05); color:#374151; }
+    .dark .lp-trigger:hover { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); }
+    .lp-tflag { font-size:14px; line-height:1; }
+    .lp-chevron { width:8px; height:5px; flex-shrink:0; transition:transform 0.2s; }
+    .lp.open .lp-chevron { transform:rotate(180deg); }
+    .lp-drop { display:none; position:absolute; right:0; top:calc(100% + 6px); background:white; border:1px solid rgba(0,0,0,0.07); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.11),0 2px 6px rgba(0,0,0,0.05); padding:4px; min-width:130px; z-index:200; }
+    .dark .lp-drop { background:#1C1C24; border-color:rgba(255,255,255,0.08); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+    .lp.open .lp-drop { display:block; animation:lpIn 0.15s cubic-bezier(0.16,1,0.3,1) both; }
+    @keyframes lpIn { from { opacity:0; transform:translateY(-6px) scale(0.97); } to { opacity:1; transform:none; } }
+    .lp-opt { display:flex; align-items:center; gap:8px; width:100%; background:none; border:none; cursor:pointer; padding:7px 10px; border-radius:8px; transition:background 0.12s; }
+    .lp-opt:hover { background:rgba(0,0,0,0.04); }
+    .dark .lp-opt:hover { background:rgba(255,255,255,0.06); }
+    .lp-flag { font-size:14px; line-height:1; }
+    .lp-opt-code { font-size:11px; font-weight:700; letter-spacing:0.04em; color:#111827; flex:1; }
+    .dark .lp-opt-code { color:white; }
+    .lp-opt-name { font-size:11px; color:#9ca3af; }
+    svg.lp-flag { flex-shrink:0; }
+    .lp-tflag svg { width:14px; height:10px; vertical-align:middle; }
+    [data-lang-block] { display: none; }
+    [data-lang-block].lang-visible { display: block; }
+  </style>
+</head>
+<body class="bg-[#F5F5FA] dark:bg-[#0A0A0F] text-gray-900 dark:text-white">
+
+<!-- Header simple -->
+<header class="border-b border-gray-200 dark:border-white/[0.06] py-5 px-5">
+  <div class="max-w-3xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <img src="assets/logo.png" alt="Logo de Finances" class="w-7 h-7 rounded-xl object-cover" />
+      <span class="font-bold text-base">Finances</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <div class="lp" id="lp">
+        <button class="lp-trigger" id="lp-trigger">
+          <span class="lp-tflag" id="lp-flag-d"></span>
+          <span id="lp-code-d">CA</span>
+          <svg class="lp-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="lp-drop">
+          <button class="lp-opt" data-lang="ca"><svg class="lp-flag" width="18" height="12" viewBox="0 0 60 54" fill="none"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg><span class="lp-opt-code">CA</span></button>
+          <button class="lp-opt" data-lang="es"><span class="lp-flag">🇪🇸</span><span class="lp-opt-code">ES</span></button>
+          <button class="lp-opt" data-lang="en"><span class="lp-flag">🇬🇧</span><span class="lp-opt-code">EN</span></button>
+        </div>
+      </div>
+      <a href="index.html" class="text-sm text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white" id="back-link">
+        <i class="fa-solid fa-arrow-left text-xs mr-1.5"></i> <span id="back-label">Tornar a l'inici</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="py-12 px-5">
+
+  <div data-lang-block="ca" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Política de Privacitat</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances per a l'iPhone · Vigent des del 29 d'octubre de 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Finances no recull res. Sense comptes, sense analítica, sense telemetria, sense informes d'errors, sense publicitat i sense rastreig de cap mena. L'app no fa connexions de xarxa pel seu compte.</p></div>
+
+<h2>Quines dades es recullen</h2>
+<p>Cap. Finances no té registre, perfil d'usuari ni servidor al darrere. No llegeix els teus contactes, la teva ubicació, les teves fotos, el teu micròfon ni els teus identificadors, i no inclou cap sistema d'analítica ni de publicitat. No hi ha recollida per descriure, perquè no hi ha recollida.</p>
+<p>És la mateixa resposta que es dona al qüestionari de privacitat de l'App Store, on totes les categories figuren com a «Dades no recollides».</p>
+
+<h2>Les teves dades no surten del teu iPhone</h2>
+<p>Els teus moviments, comptes, categories, pressupostos, pagaments recurrents i objectius es guarden a l'emmagatzematge propi de l'app, dins del teu iPhone. Res d'això s'envia, es transmet ni es comparteix amb nosaltres ni amb ningú més.</p>
+<ul>
+<li><strong>Bloqueig amb Face ID, Touch ID o codi.</strong> El fa l'iOS. L'app només rep un «sí» o un «no»: mai veu la teva cara, la teva empremta ni el teu codi.</li>
+<li><strong>Avisos.</strong> Els recordatoris de pagaments i pressupostos són notificacions locals programades al teu iPhone. No passen per cap servidor.</li>
+<li><strong>Widget.</strong> Llegeix un petit resum que l'app deixa en un espai compartit del teu propi iPhone per poder-lo mostrar a la pantalla d'inici.</li>
+</ul>
+
+<h2>Tercers</h2>
+<p>L'app no comparteix dades amb ningú, perquè no en recull cap. No inclou codi d'analítica, publicitat ni atribució de tercers i no envia res a cap servei extern. L'únic tercer implicat és Apple, i només per a les compres (vegeu més avall).</p>
+
+<h2>Què es guarda al teu dispositiu i durant quant de temps</h2>
+<p>Tot l'anterior, més les teves preferències (idioma, divisa, nom, tema i ajustos de la targeta), es conserva mentre l'app estigui instal·lada. Desinstal·lar l'app ho elimina tot.</p>
+<p><strong>Important:</strong> com que no hi ha còpia a cap servidor nostre, si desinstal·les l'app sense haver exportat una còpia, no podem recuperar les teves dades. Les còpies de seguretat que faci el teu propi iPhone (a l'iCloud o en un ordinador) les gestiona Apple.</p>
+
+<h2>Còpies i fitxers que exportes</h2>
+<p>La funció «Exportar dades» crea un fitxer amb totes les teves dades, i «Importar moviments» llegeix un fitxer CSV que tu tries. Aquests fitxers no estan xifrats i van exactament on tu decideixis guardar-los o enviar-los. Guarda'ls en un lloc segur i comparteix-los només amb qui vulguis. Nosaltres no els rebem mai.</p>
+
+<h2>Aquest web</h2>
+<p>Aquest web és estàtic i no té comptes. Per mostrar-se carrega estils, tipografies i icones des de servidors de tercers (Tailwind CSS, Google Fonts i cdnjs/Cloudflare), que poden rebre la teva adreça IP i dades tècniques del navegador en servir-los. No usem galetes, analítica ni rastreig. Guardem al teu propi navegador (emmagatzematge local) només la teva preferència d'idioma i de tema; aquesta informació no surt del teu dispositiu.</p>
+<p>Les pàgines estan allotjades a GitHub Pages (GitHub, Inc., EUA) i, com qualsevol servidor web, registra les dades tècniques de cada petició (adreça IP, hora, pàgina sol·licitada, versió del navegador) per servir i protegir el lloc. No fem servir aquests registres per elaborar perfils ni els combinem amb res. És l'únic tractament que fa aquest web, i la seva base jurídica és el nostre interès legítim en servir i protegir les pàgines (art. 6.1.f RGPD).</p>
+
+<h2>Escriure'ns</h2>
+<p>Si escrius a holafinancesapp@gmail.com, tractem el que ens enviïs (la teva adreça de correu, el teu nom si el signes i el que expliquis) amb l'única finalitat de respondre't. La base jurídica és el nostre interès legítim en atendre qui ens contacta i, si el teu missatge tracta d'una compra, l'execució d'aquesta relació (art. 6.1.b i f RGPD). La bústia està allotjada a Google (Gmail), que guarda els missatges per compte nostre.</p>
+<p>Conservem els missatges de suport dotze mesos des de l'última resposta i després els eliminem, tret que formin part d'una reclamació, i en aquest cas es conserven fins que es tanqui. Res del que escriguis s'usa per a màrqueting ni es comparteix amb tercers.</p>
+
+<h2>Esborrar les teves dades i retirar el consentiment</h2>
+<p>L'app no guarda cap dada personal teva que ens puguis demanar d'accedir, rectificar, exportar o suprimir, perquè no en recull cap i res no arriba fins a nosaltres. Per esborrar el que hi ha al teu iPhone n'hi ha prou amb eliminar l'app. L'app no demana cap consentiment, així que no n'hi ha cap per retirar.</p>
+
+<h2>Els teus drets</h2>
+<p>Per al que sí que implica dades personals (el registre del servidor d'aquest web i els correus que ens enviïs) tens els drets que et dona el RGPD: saber què tractem, rectificar-ho o suprimir-ho, limitar o oposar-te al tractament i rebre'l en un format portable. Escriu a holafinancesapp@gmail.com i et respondrem en un mes.</p>
+<p>No hi ha decisions automatitzades ni elaboració de perfils. Si creus que les teves dades s'han tractat malament, pots reclamar davant l'Agència Espanyola de Protecció de Dades o davant l'autoritat del teu país de la UE.</p>
+
+<h2>Compres</h2>
+<p>Finances Pro es ven a través de l'App Store. Apple cobra el pagament i la seva pròpia política de privacitat cobreix aquesta transacció. L'app només pregunta al sistema si existeix una compra vàlida i rep un «sí» o un «no». Mai no veiem el teu nom, el teu correu, el teu compte d'Apple ni les teves dades de pagament.</p>
+
+<h2>Menors</h2>
+<p>No es recull res de ningú, tampoc de menors. L'app no està dirigida a infants i no té funcions socials, de missatgeria ni de contingut generat per usuaris.</p>
+
+<h2>Canvis en aquesta política</h2>
+<p>Si aquesta política canvia, la nova versió apareixerà en aquesta pàgina amb una nova data. Un canvi que t'afectés de manera rellevant s'anotaria també a les notes de la versió de l'app.</p>
+
+<h2>Responsable i contacte</h2>
+<p>Marc García-Cuevas de Paz · holafinancesapp@gmail.com. Les dades completes d'identificació són a l'<a href="avis-legal.html">avís legal</a>.</p>
+
+  </div>
+
+  <div data-lang-block="es" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Política de privacidad</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances para iPhone · Vigente desde el 29 de octubre de 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Finances no recoge nada. Sin cuentas, sin analítica, sin telemetría, sin informes de fallos, sin publicidad y sin rastreo de ningún tipo. La app no hace conexiones de red por su cuenta.</p></div>
+
+<h2>Qué datos se recogen</h2>
+<p>Ninguno. Finances no tiene registro, perfil de usuario ni servidor detrás. No lee tus contactos, tu ubicación, tus fotos, tu micrófono ni tus identificadores, y no incluye ningún sistema de analítica ni de publicidad. No hay recogida que describir, porque no hay recogida.</p>
+<p>Es la misma respuesta que se da en el cuestionario de privacidad de la App Store, donde todas las categorías figuran como «Datos no recogidos».</p>
+
+<h2>Tus datos no salen de tu iPhone</h2>
+<p>Tus movimientos, cuentas, categorías, presupuestos, pagos recurrentes y objetivos se guardan en el almacenamiento propio de la app, dentro de tu iPhone. Nada de eso se envía, se transmite ni se comparte con nosotros ni con nadie más.</p>
+<ul>
+<li><strong>Bloqueo con Face ID, Touch ID o código.</strong> Lo realiza iOS. La app solo recibe un «sí» o un «no»: nunca ve tu cara, tu huella ni tu código.</li>
+<li><strong>Avisos.</strong> Los recordatorios de pagos y presupuestos son notificaciones locales programadas en tu iPhone. No pasan por ningún servidor.</li>
+<li><strong>Widget.</strong> Lee un pequeño resumen que la app deja en un espacio compartido de tu propio iPhone para poder mostrarlo en la pantalla de inicio.</li>
+</ul>
+
+<h2>Terceros</h2>
+<p>La app no comparte datos con nadie, porque no recoge ninguno. No incluye código de analítica, publicidad ni atribución de terceros y no envía nada a ningún servicio externo. El único tercero implicado es Apple, y solo para las compras (ver más abajo).</p>
+
+<h2>Qué se guarda en tu dispositivo y durante cuánto tiempo</h2>
+<p>Todo lo anterior, más tus preferencias (idioma, divisa, nombre, tema y ajustes de la tarjeta), se conserva mientras la app esté instalada. Desinstalar la app elimina todo.</p>
+<p><strong>Importante:</strong> como no hay copia en ningún servidor nuestro, si desinstalas la app sin haber exportado una copia, no podemos recuperar tus datos. Las copias de seguridad que haga tu propio iPhone (en iCloud o en un ordenador) las gestiona Apple.</p>
+
+<h2>Copias y archivos que exportas</h2>
+<p>La función «Exportar datos» crea un archivo con todos tus datos, y «Importar movimientos» lee un archivo CSV que tú eliges. Estos archivos no están cifrados y van exactamente donde tú decidas guardarlos o enviarlos. Guárdalos en un sitio seguro y compártelos solo con quien quieras. Nosotros nunca los recibimos.</p>
+
+<h2>Esta web</h2>
+<p>Esta web es estática y no tiene cuentas. Para mostrarse carga estilos, tipografías e iconos desde servidores de terceros (Tailwind CSS, Google Fonts y cdnjs/Cloudflare), que pueden recibir tu dirección IP y datos técnicos de tu navegador al servirlos. No usamos cookies, analítica ni rastreo. Guardamos en tu propio navegador (almacenamiento local) solo tu preferencia de idioma y de tema; esa información no sale de tu dispositivo.</p>
+<p>Las páginas están alojadas en GitHub Pages (GitHub, Inc., EE. UU.) y, como cualquier servidor web, registra los datos técnicos de cada petición (dirección IP, hora, página solicitada, versión del navegador) para servir y proteger el sitio. No usamos esos registros para elaborar perfiles ni los combinamos con nada. Es el único tratamiento que hace esta web, y su base jurídica es nuestro interés legítimo en servir y proteger las páginas (art. 6.1.f RGPD).</p>
+
+<h2>Escribirnos</h2>
+<p>Si escribes a holafinancesapp@gmail.com, tratamos lo que nos envíes (tu dirección de correo, tu nombre si lo firmas y lo que cuentes) con la única finalidad de responderte. La base jurídica es nuestro interés legítimo en atender a quien nos contacta y, si tu mensaje trata de una compra, la ejecución de esa relación (art. 6.1.b y f RGPD). El buzón está alojado en Google (Gmail), que guarda los mensajes por nuestra cuenta.</p>
+<p>Conservamos los mensajes de soporte doce meses desde la última respuesta y después los eliminamos, salvo que formen parte de una reclamación, en cuyo caso se conservan hasta que se cierre. Nada de lo que escribas se usa para marketing ni se comparte con terceros.</p>
+
+<h2>Borrar tus datos y retirar el consentimiento</h2>
+<p>La app no guarda ningún dato personal tuyo que puedas pedirnos acceder, rectificar, exportar o suprimir, porque no recoge ninguno y nada llega hasta nosotros. Para borrar lo que hay en tu iPhone basta con eliminar la app. La app no pide ningún consentimiento, así que no hay ninguno que retirar.</p>
+
+<h2>Tus derechos</h2>
+<p>Para lo único que sí implica datos personales (el registro del servidor de esta web y los correos que nos envíes) tienes los derechos que te da el RGPD: saber qué tratamos, rectificarlo o suprimirlo, limitar u oponerte al tratamiento y recibirlo en un formato portable. Escribe a holafinancesapp@gmail.com y te contestaremos en un mes.</p>
+<p>No hay decisiones automatizadas ni elaboración de perfiles. Si crees que tus datos se han tratado mal, puedes reclamar ante la Agencia Española de Protección de Datos o ante la autoridad de tu país de la UE.</p>
+
+<h2>Compras</h2>
+<p>Finances Pro se vende a través de la App Store. Apple cobra el pago y su propia política de privacidad cubre esa transacción. La app solo pregunta al sistema si existe una compra válida y recibe un «sí» o un «no». Nunca vemos tu nombre, tu correo, tu cuenta de Apple ni tus datos de pago.</p>
+
+<h2>Menores</h2>
+<p>No se recoge nada de nadie, tampoco de menores. La app no está dirigida a niños y no tiene funciones sociales, de mensajería ni de contenido generado por usuarios.</p>
+
+<h2>Cambios en esta política</h2>
+<p>Si esta política cambia, la nueva versión aparecerá en esta página con una nueva fecha. Un cambio que te afectara de forma relevante se anotaría también en las notas de la versión de la app.</p>
+
+<h2>Responsable y contacto</h2>
+<p>Marc García-Cuevas de Paz · holafinancesapp@gmail.com. Los datos completos de identificación están en el <a href="avis-legal.html">aviso legal</a>.</p>
+
+  </div>
+
+  <div data-lang-block="en" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Privacy Policy</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances for iPhone · Effective 29 October 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Finances collects nothing. No accounts, no analytics, no telemetry, no crash reports, no advertising and no tracking of any kind. The app makes no network connections of its own.</p></div>
+
+<h2>What data is collected</h2>
+<p>None. Finances has no sign-in, no user profile and no server behind it. It does not read your contacts, location, photos, microphone or identifiers, and it contains no analytics or advertising frameworks. There is no collection to describe, because there is no collection.</p>
+<p>This is the same answer given in the App Store privacy questionnaire, where every category is marked «Data Not Collected».</p>
+
+<h2>Your data never leaves your iPhone</h2>
+<p>Your entries, accounts, categories, budgets, recurring payments and goals are kept in the app's own storage on your iPhone. None of it is sent, transmitted or shared with us or anybody else.</p>
+<ul>
+<li><strong>Lock with Face ID, Touch ID or passcode.</strong> iOS does it. The app only receives a «yes» or a «no»: it never sees your face, your fingerprint or your passcode.</li>
+<li><strong>Reminders.</strong> Payment and budget alerts are local notifications scheduled on your iPhone. They do not go through any server.</li>
+<li><strong>Widget.</strong> It reads a small summary that the app leaves in a shared space on your own iPhone so it can be shown on the Home Screen.</li>
+</ul>
+
+<h2>Third parties</h2>
+<p>The app shares no data with anyone, because it collects none. It bundles no third-party analytics, advertising or attribution code and sends nothing to any external service. The only third party involved is Apple, and only for purchases (see below).</p>
+
+<h2>What is stored on your device, and for how long</h2>
+<p>All of the above, plus your preferences (language, currency, name, theme and card settings), is kept for as long as the app is installed. Deleting the app removes all of it.</p>
+<p><strong>Important:</strong> because no copy exists on any server of ours, if you delete the app without exporting a copy first, we cannot recover your data. Backups made by your iPhone itself (to iCloud or to a computer) are handled by Apple.</p>
+
+<h2>Copies and files you export</h2>
+<p>«Export data» creates a file with all your data, and «Import entries» reads a CSV file you choose. These files are not encrypted and go exactly where you decide to save or send them. Keep them somewhere safe and share them only with people you choose. We never receive them.</p>
+
+<h2>This website</h2>
+<p>This website is static and has no accounts. To display, it loads styles, fonts and icons from third-party servers (Tailwind CSS, Google Fonts and cdnjs/Cloudflare), which may receive your IP address and technical browser details when serving them. We use no cookies, analytics or tracking. We store in your own browser (local storage) only your language and theme preference; that information never leaves your device.</p>
+<p>The pages are hosted on GitHub Pages (GitHub, Inc., USA) and, like every web server, it records the technical details of each request (IP address, time, page requested, browser version) to serve and protect the site. We do not use those logs to build profiles and we do not combine them with anything. That is the only processing this website does, and its lawful basis is our legitimate interest in delivering and securing the pages (article 6(1)(f) GDPR).</p>
+
+<h2>Writing to us</h2>
+<p>If you write to holafinancesapp@gmail.com, we process what you send (your email address, your name if you sign it, and whatever you tell us) for the single purpose of answering you. The lawful basis is our legitimate interest in replying to people who contact us and, where your message concerns a purchase, the performance of that relationship (article 6(1)(b) and (f) GDPR). The mailbox is hosted by Google (Gmail), which stores the messages on our behalf.</p>
+<p>Support messages are kept for twelve months from the last reply and are then deleted, unless a message forms part of a legal claim, in which case it is kept until the claim is closed. Nothing you write is used for marketing or shared with third parties.</p>
+
+<h2>Deleting your data and withdrawing consent</h2>
+<p>The app holds no personal data of yours that you could ask us to access, correct, export or erase, because it collects none and nothing reaches us. To remove what is on your iPhone, delete the app. The app asks for no consent, so there is none to withdraw.</p>
+
+<h2>Your rights</h2>
+<p>For the only things that do involve personal data (this site's server log and any email you send us) you have the rights the GDPR gives you: to ask what we hold, to have it corrected or erased, to restrict or object to its processing, and to receive it in a portable form. Write to holafinancesapp@gmail.com and you will have an answer within one month.</p>
+<p>There is no automated decision-making and no profiling. If you think your data has been handled badly, you can complain to the Spanish supervisory authority (the Agencia Española de Protección de Datos) or to the authority of the EU country you live in.</p>
+
+<h2>Purchases</h2>
+<p>Finances Pro is sold through the App Store. Apple takes the payment, and Apple's own privacy policy covers that transaction. The app only asks the system whether a valid purchase exists and receives a «yes» or a «no». We never see your name, your email address, your Apple Account or your payment details.</p>
+
+<h2>Children</h2>
+<p>Nothing is collected from anybody, so nothing is collected from children. The app is not directed at children and has no social, messaging or user-generated content features.</p>
+
+<h2>Changes to this policy</h2>
+<p>If this policy changes, the new version will appear on this page with a new date. A change that materially affects you would also be noted in the app's release notes.</p>
+
+<h2>Controller and contact</h2>
+<p>Marc García-Cuevas de Paz · holafinancesapp@gmail.com. Full identification details are in the <a href="avis-legal.html">legal notice</a>.</p>
+
+  </div>
+
+</main>
+
+<script>
+  const BACK = { ca: "Tornar a l'inici", es: 'Volver al inicio', en: 'Back to home' };
+  const TITLES = { ca: 'Política de privacitat · Finances', es: 'Política de privacidad · Finances', en: 'Privacy Policy · Finances' };
+
+  function applyLang(lang) {
+    const supported = ['ca','es','en'];
+    if (!supported.includes(lang)) lang = 'ca';
+    localStorage.setItem('landing-lang', lang);
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang];
+
+    document.querySelectorAll('[data-lang-block]').forEach(el => {
+      el.classList.toggle('lang-visible', el.dataset.langBlock === lang);
+    });
+    var _SENYERA_T = '<svg viewBox="0 0 60 54" fill="none" style="width:14px;height:10px;flex-shrink:0;vertical-align:middle"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg>';
+    var _LP_TFLAGS = { ca: _SENYERA_T, es: '🇪🇸', en: '🇬🇧' };
+    var _lpFlagEl = document.getElementById('lp-flag-d');
+    var _lpC = document.getElementById('lp-code-d');
+    if (_lpFlagEl) _lpFlagEl.innerHTML = _LP_TFLAGS[lang] || _LP_TFLAGS.ca;
+    if (_lpC) _lpC.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lp').forEach(function(el) { el.classList.remove('open'); });
+    const lbl = document.getElementById('back-label');
+    if (lbl) lbl.textContent = BACK[lang] || BACK.ca;
+  }
+
+  (function () {
+    const saved = localStorage.getItem('landing-lang');
+    const browser = (navigator.language || 'ca').substring(0, 2);
+    const supported = ['ca','es','en'];
+    const asked = new URLSearchParams(location.search).get('lang');
+    applyLang(supported.includes(asked) ? asked : (supported.includes(saved) ? saved : (supported.includes(browser) ? browser : 'ca')));
+  })();
+
+  document.addEventListener('click', function(e) {
+    var opt = e.target.closest('.lp-opt');
+    if (opt && opt.dataset.lang) { applyLang(opt.dataset.lang); return; }
+    var trigger = e.target.closest('#lp-trigger');
+    if (trigger) { var p = trigger.closest('.lp'); if (p) { p.classList.toggle('open'); e.stopPropagation(); } return; }
+    document.querySelectorAll('.lp.open').forEach(function(el) { el.classList.remove('open'); });
+  });
+
+  // Dark mode toggle (reuse landing preference)
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('landing-theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark');
+    else if (saved === 'light') document.documentElement.classList.remove('dark');
+  });
+</script>
+
+</body>
+</html>

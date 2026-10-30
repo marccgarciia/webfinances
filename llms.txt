@@ -1,0 +1,26 @@
+# Finances
+
+> Finances is an iPhone app (iOS 17 or later) to log income and expenses, set monthly budgets by category and see how your finances evolve month by month and year by year. It has no sign-up, never connects to your bank and keeps all your data on your iPhone. Made in Catalonia (Spain) by Marc García-Cuevas de Paz.
+> Finances es una app para iPhone para apuntar ingresos y gastos, fijar presupuestos por categoría y ver tu evolución. Sin registro, sin conectar el banco y con los datos en tu iPhone.
+
+Status: launching soon on the App Store (iPhone only; no Android or web version).
+Languages: Spanish, Catalan, English (more in preparation).
+Price: free to download, with optional in-app purchases (Finances Pro). Final prices are set in the App Store.
+
+## What makes it different
+- Apple Pay payments can be logged automatically through a Shortcuts automation: no typing.
+- Privacy by design: no account, no server, no analytics, no ads, no bank connection. Data never leaves the iPhone.
+- Habit-first approach: small daily habits build results; no guilt, no pressure streaks.
+- Widgets, Siri and Shortcuts support; light and dark mode.
+
+## Pages
+- [Home (Español)](https://financesapp.es/): overview in Spanish
+- [Home (Català)](https://financesapp.es/ca/): overview in Catalan
+- [Home (English)](https://financesapp.es/en/): overview in English
+- [Support](https://financesapp.es/suport.html): FAQ, restoring purchases, moving data to another iPhone, contact
+- [Privacy policy](https://financesapp.es/privacitat.html)
+- [Terms of use](https://financesapp.es/termes.html)
+- [Legal notice](https://financesapp.es/avis-legal.html)
+
+## Contact
+holafinancesapp@gmail.com · El Prat de Llobregat, Barcelona, Spain

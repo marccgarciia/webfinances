@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termes d'ús · Finances</title>
+  <meta name="description" content="Termes d'ús de Finances, l'app per a iPhone per apuntar ingressos i despeses: què pots fer amb l'app, Finances Pro i les teves responsabilitats." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://financesapp.es/termes.html" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    };
+    (function () {
+      var saved = localStorage.getItem('landing-theme');
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else if (saved === 'light') document.documentElement.classList.remove('dark');
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .legal h2 { font-size: 1.5rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; color: rgb(17 24 39); letter-spacing: -0.02em; }
+    .dark .legal h2 { color: rgb(255 255 255); }
+    .legal h3 { font-size: 1.1rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem; color: rgb(55 65 81); }
+    .dark .legal h3 { color: rgb(229 231 235); }
+    .legal p, .legal li { color: rgb(75 85 99); line-height: 1.7; margin-bottom: 0.75rem; }
+    .dark .legal p, .dark .legal li { color: rgba(255,255,255,0.6); }
+    .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal ul { list-style: disc; }
+    .legal ol { list-style: decimal; }
+    .legal a { color: rgb(59 130 246); text-decoration: underline; }
+    .legal strong { color: rgb(31 41 55); font-weight: 600; }
+    .dark .legal strong { color: rgba(255,255,255,0.85); }
+    .legal table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .legal th, .legal td { padding: 0.6rem 0.8rem; border: 1px solid rgb(229 231 235); text-align: left; font-size: 0.875rem; }
+    .dark .legal th, .dark .legal td { border-color: rgba(255,255,255,0.08); }
+    .legal th { background: rgb(249 250 251); font-weight: 600; color: rgb(55 65 81); }
+    .dark .legal th { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.7); }
+    .lp { position:relative; display:inline-block; }
+    .lp-trigger { display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; font-size:11px; font-weight:600; color:#6b7280; padding:4px 8px; border-radius:8px; letter-spacing:0.04em; text-transform:uppercase; transition:all 0.15s; }
+    .dark .lp-trigger { color:rgba(255,255,255,0.35); }
+    .lp-trigger:hover { background:rgba(0,0,0,0.05); color:#374151; }
+    .dark .lp-trigger:hover { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); }
+    .lp-tflag { font-size:14px; line-height:1; }
+    .lp-chevron { width:8px; height:5px; flex-shrink:0; transition:transform 0.2s; }
+    .lp.open .lp-chevron { transform:rotate(180deg); }
+    .lp-drop { display:none; position:absolute; right:0; top:calc(100% + 6px); background:white; border:1px solid rgba(0,0,0,0.07); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.11),0 2px 6px rgba(0,0,0,0.05); padding:4px; min-width:130px; z-index:200; }
+    .dark .lp-drop { background:#1C1C24; border-color:rgba(255,255,255,0.08); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+    .lp.open .lp-drop { display:block; animation:lpIn 0.15s cubic-bezier(0.16,1,0.3,1) both; }
+    @keyframes lpIn { from { opacity:0; transform:translateY(-6px) scale(0.97); } to { opacity:1; transform:none; } }
+    .lp-opt { display:flex; align-items:center; gap:8px; width:100%; background:none; border:none; cursor:pointer; padding:7px 10px; border-radius:8px; transition:background 0.12s; }
+    .lp-opt:hover { background:rgba(0,0,0,0.04); }
+    .dark .lp-opt:hover { background:rgba(255,255,255,0.06); }
+    .lp-flag { font-size:14px; line-height:1; }
+    .lp-opt-code { font-size:11px; font-weight:700; letter-spacing:0.04em; color:#111827; flex:1; }
+    .dark .lp-opt-code { color:white; }
+    .lp-opt-name { font-size:11px; color:#9ca3af; }
+    svg.lp-flag { flex-shrink:0; }
+    .lp-tflag svg { width:14px; height:10px; vertical-align:middle; }
+    [data-lang-block] { display: none; }
+    [data-lang-block].lang-visible { display: block; }
+  </style>
+</head>
+<body class="bg-[#F5F5FA] dark:bg-[#0A0A0F] text-gray-900 dark:text-white">
+
+<!-- Header simple -->
+<header class="border-b border-gray-200 dark:border-white/[0.06] py-5 px-5">
+  <div class="max-w-3xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <img src="assets/logo.png" alt="Logo de Finances" class="w-7 h-7 rounded-xl object-cover" />
+      <span class="font-bold text-base">Finances</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <div class="lp" id="lp">
+        <button class="lp-trigger" id="lp-trigger">
+          <span class="lp-tflag" id="lp-flag-d"></span>
+          <span id="lp-code-d">CA</span>
+          <svg class="lp-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="lp-drop">
+          <button class="lp-opt" data-lang="ca"><svg class="lp-flag" width="18" height="12" viewBox="0 0 60 54" fill="none"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg><span class="lp-opt-code">CA</span></button>
+          <button class="lp-opt" data-lang="es"><span class="lp-flag">🇪🇸</span><span class="lp-opt-code">ES</span></button>
+          <button class="lp-opt" data-lang="en"><span class="lp-flag">🇬🇧</span><span class="lp-opt-code">EN</span></button>
+        </div>
+      </div>
+      <a href="index.html" class="text-sm text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white" id="back-link">
+        <i class="fa-solid fa-arrow-left text-xs mr-1.5"></i> <span id="back-label">Tornar a l'inici</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="py-12 px-5">
+
+  <div data-lang-block="ca" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Termes d'ús</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances per a l'iPhone · Vigent des del 29 d'octubre de 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Aquests són els termes d'ús de Finances, una aplicació per a l'iPhone publicada per Marc García-Cuevas de Paz. Descarregar o usar l'app implica acceptar-los.</p></div>
+
+<h2>Llicència</h2>
+<p>La llicència d'ús és la d'Apple: Finances es distribueix amb el contracte de llicència estàndard per a aplicacions amb llicència d'Apple (Licensed Application End User License Agreement), que és el contracte d'usuari final d'aquesta app. Aquests termes el complementen i cobreixen el que el contracte estàndard no cobreix: què fa l'app, les teves dades, la versió gratuïta i què costa Finances Pro i com es renova. Si res d'aquí contradiu el contracte estàndard d'Apple respecte a la llicència en si, preval el d'Apple.</p>
+
+<h2>Què fa l'app</h2>
+<p>Finances és una eina per apuntar i organitzar els teus propis ingressos, despeses, pressupostos i pagaments recurrents. No es connecta al teu banc: les dades que veus són les que tu introdueixes. Tot funciona al teu iPhone.</p>
+
+<h2>No és assessorament financer</h2>
+<p>Els saldos, totals, estadístiques i avisos de l'app són informatius i depenen del que hagis apuntat. Finances no dona assessorament financer, fiscal ni legal, i no substitueix els extractes del teu banc. Ets responsable de comprovar que el que apuntes és correcte.</p>
+
+<h2>Les teves dades i les teves còpies</h2>
+<p>Les teves dades es guarden només al teu iPhone. Com que no en tenim còpia, tu ets responsable d'exportar còpies de seguretat amb la funció «Exportar dades» abans de desinstal·lar l'app, canviar de mòbil o restablir el dispositiu. Els fitxers exportats no estan xifrats: guarda'ls en un lloc segur.</p>
+
+<h2>Versió gratuïta i Finances Pro</h2>
+<p>Finances és gratis, amb límits en el nombre de comptes, categories pròpies i pagaments recurrents, i amb algunes funcions reservades a Pro. Finances Pro desbloqueja aquests límits i funcions. Es ven de dues maneres:</p>
+<ul>
+<li><strong>Finances Pro de per vida:</strong> compra única, no es renova.</li>
+<li><strong>Finances Pro anual:</strong> subscripció de renovació automàtica, amb períodes d'un any.</li>
+</ul>
+<p>No hi ha cap altra diferència entre elles. Els preus es mostren a l'app en el moment de la compra i poden variar segons el país: el preu que veus en aquell moment és el que s'aplica.</p>
+
+<h2>Pagament, renovació i cancel·lació</h2>
+<p>El pagament es carrega al teu compte d'Apple en confirmar la compra. La venda la fa Apple, no nosaltres: el teu contracte de compravenda és amb Apple i el regeixen les Condicions dels serveis multimèdia d'Apple. El teu contracte d'ús de l'app és amb nosaltres, i són aquesta pàgina i el contracte de llicència d'Apple.</p>
+<p>La subscripció anual es renova automàticament tret que desactivis la renovació almenys 24 hores abans del final del període en curs. El càrrec de la renovació es fa en les 24 hores anteriors al final de cada període, al mateix preu tret que t'avisem d'un canvi abans.</p>
+<p>Pots gestionar la subscripció i desactivar la renovació en qualsevol moment. A l'iPhone: Ajustos › el teu nom › Subscripcions, o des d'apps.apple.com/account/subscriptions. Cancel·lar atura els càrrecs futurs; no retorna un període ja pagat. La compra de per vida es paga una sola vegada i no es renova, així que no hi ha res a cancel·lar.</p>
+<p>Si ets consumidor a la Unió Europea o al Regne Unit, tens un dret de desistiment de catorze dies en la compra de contingut digital. Com que el venedor és Apple, l'exerceixes davant d'Apple. Aquest dret es perd quan comences a usar un contingut que has demanat rebre immediatament, que és el que passa en comprar Pro perquè s'activa a l'instant; a la pràctica Apple ho gestiona com una sol·licitud de reemborsament. Els reemborsaments els gestiona Apple, no nosaltres: demana'l a reportaproblem.apple.com.</p>
+
+<h2>Restaurar compres</h2>
+<p>A la pantalla de Pro hi ha un botó «Restaurar compres». Fes-lo servir en un iPhone nou o després de reinstal·lar l'app per recuperar una compra feta amb el mateix compte d'Apple.</p>
+
+<h2>Si s'acaba la teva subscripció</h2>
+<p>Si cancel·les o falla un pagament, Finances continua funcionant i torna a la versió gratuïta. No s'esborra res: el que ja havies creat es conserva, però no podràs afegir més enllà dels límits gratuïts ni usar les funcions de Pro fins que ho tornis a ser. En subscriure't de nou o comprar la versió de per vida, tot es desbloqueja a l'instant.</p>
+
+<h2>Privacitat</h2>
+<p>Finances no recull res ni envia res enlloc. La <a href="privacitat.html">política de privacitat</a> ho explica amb detall i forma part d'aquests termes.</p>
+
+<h2>El que no prometem</h2>
+<p>Finances s'ofereix tal qual. No garantim que estigui lliure d'errors ni que continuï funcionant després d'una actualització del sistema operatiu. Fins on la llei ho permet, no responem de pèrdues de dades, de beneficis ni d'altres danys indirectes derivats de l'ús de l'app. Res d'això limita la responsabilitat que la llei no permet limitar, i si ets consumidor els teus drets legals no es veuen afectats.</p>
+<p>«De per vida» vol dir mentre Finances existeixi i funcioni al teu iPhone; no és una promesa que es mantingui una versió, funció o sistema operatiu concrets.</p>
+
+<h2>Ús acceptable</h2>
+<p>No descompilis, no facis enginyeria inversa ni redistribueixis l'app més enllà del que permetin la llei i les llicències aplicables.</p>
+
+<h2>La posició d'Apple</h2>
+<p>Finances es distribueix a través de l'App Store. El següent ja forma part del contracte estàndard d'Apple i es repeteix aquí perquè tot sigui en una sola pàgina.</p>
+<ul>
+<li><strong>Aquest contracte és amb nosaltres, no amb Apple.</strong> Apple no és part d'aquests termes. Nosaltres, no Apple, som els únics responsables de Finances i del seu contingut.</li>
+<li><strong>Abast de la llicència.</strong> És una llicència intransferible per usar l'app en productes de marca Apple que posseeixis o controlis, segons les regles d'ús de les Condicions dels serveis multimèdia d'Apple.</li>
+<li><strong>Manteniment i suport.</strong> Som els únics responsables del manteniment i el suport. Apple no té cap obligació de prestar-los.</li>
+<li><strong>Garantia.</strong> Som els únics responsables de les garanties del producte. Si l'app no s'ajusta a una garantia aplicable, pots avisar Apple i et reemborsarà el preu de compra. En la mesura que permeti la llei, Apple no té cap altra obligació de garantia.</li>
+<li><strong>Reclamacions sobre el producte.</strong> Som nosaltres, no Apple, qui atenem les reclamacions teves o de tercers sobre l'app o el seu ús, incloses les de responsabilitat per producte, les d'incompliment de requisits legals i les de consum o privacitat.</li>
+<li><strong>Propietat intel·lectual.</strong> Si un tercer al·lega que l'app infringeix els seus drets, som nosaltres, no Apple, els responsables de la seva investigació, defensa i resolució.</li>
+<li><strong>Compliment legal.</strong> Declares que no ets en un país subjecte a embargament del Govern dels EUA ni inclòs a les seves llistes de parts restringides.</li>
+<li><strong>Condicions de tercers.</strong> Has de complir les condicions de tercers que apliquin en usar l'app.</li>
+<li><strong>Apple com a tercer beneficiari.</strong> Apple i les seves filials són tercers beneficiaris d'aquests termes i, en acceptar-los, els poden fer valer contra tu.</li>
+</ul>
+
+<h2>A qui adreçar-te</h2>
+<p>Els dubtes, queixes i reclamacions sobre Finances s'adrecen a Marc García-Cuevas de Paz, El Prat de Llobregat, Barcelona, España · holafinancesapp@gmail.com.</p>
+
+<h2>Canvis en aquests termes</h2>
+<p>Aquests termes poden canviar. La versió vigent és sempre la d'aquesta pàgina, amb la seva data. Continuar usant l'app després d'un canvi suposa acceptar la nova versió.</p>
+
+<h2>Llei aplicable</h2>
+<p>Aquests termes es regeixen per la llei espanyola. Si ets consumidor, conserves la protecció de les normes imperatives del país on vius.</p>
+
+  </div>
+
+  <div data-lang-block="es" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Términos de uso</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances para iPhone · Vigente desde el 29 de octubre de 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Estos son los términos de uso de Finances, una aplicación para iPhone publicada por Marc García-Cuevas de Paz. Descargar o usar la app implica aceptarlos.</p></div>
+
+<h2>Licencia</h2>
+<p>La licencia de uso es la de Apple: Finances se distribuye con el contrato de licencia estándar para aplicaciones con licencia de Apple (Licensed Application End User License Agreement), que es el contrato de usuario final de esta app. Estos términos lo complementan y cubren lo que el contrato estándar no cubre: qué hace la app, tus datos, la versión gratuita y lo que cuesta Finances Pro y cómo se renueva. Si algo de aquí contradice al contrato estándar de Apple respecto a la licencia en sí, prevalece el de Apple.</p>
+
+<h2>Qué hace la app</h2>
+<p>Finances es una herramienta para apuntar y organizar tus propios ingresos, gastos, presupuestos y pagos recurrentes. No se conecta a tu banco: los datos que ves son los que tú introduces. Todo funciona en tu iPhone.</p>
+
+<h2>No es asesoramiento financiero</h2>
+<p>Los saldos, totales, estadísticas y avisos de la app son informativos y dependen de lo que hayas apuntado. Finances no da asesoramiento financiero, fiscal ni legal, y no sustituye a los extractos de tu banco. Eres responsable de comprobar que lo que apuntas es correcto.</p>
+
+<h2>Tus datos y tus copias</h2>
+<p>Tus datos se guardan solo en tu iPhone. Como no tenemos copia, tú eres responsable de exportar copias de seguridad con la función «Exportar datos» antes de desinstalar la app, cambiar de móvil o restablecer el dispositivo. Los archivos exportados no están cifrados: guárdalos en un sitio seguro.</p>
+
+<h2>Versión gratuita y Finances Pro</h2>
+<p>Finances es gratis, con límites en el número de cuentas, categorías propias y pagos recurrentes, y con algunas funciones reservadas a Pro. Finances Pro desbloquea esos límites y funciones. Se vende de dos formas:</p>
+<ul>
+<li><strong>Finances Pro de por vida:</strong> compra única, no se renueva.</li>
+<li><strong>Finances Pro anual:</strong> suscripción de renovación automática, con periodos de un año.</li>
+</ul>
+<p>No hay otra diferencia entre ellas. Los precios se muestran en la app en el momento de la compra y pueden variar según el país: el precio que ves en ese momento es el que se aplica.</p>
+
+<h2>Pago, renovación y cancelación</h2>
+<p>El pago se carga a tu cuenta de Apple al confirmar la compra. La venta la realiza Apple, no nosotros: tu contrato de compraventa es con Apple y lo rigen las Condiciones de los servicios multimedia de Apple. Tu contrato de uso de la app es con nosotros, y son esta página y el contrato de licencia de Apple.</p>
+<p>La suscripción anual se renueva automáticamente salvo que desactives la renovación al menos 24 horas antes del final del periodo en curso. El cargo de la renovación se hace en las 24 horas anteriores al final de cada periodo, al mismo precio salvo que te avisemos de un cambio antes.</p>
+<p>Puedes gestionar la suscripción y desactivar la renovación en cualquier momento. En el iPhone: Ajustes › tu nombre › Suscripciones, o desde apps.apple.com/account/subscriptions. Cancelar detiene los cargos futuros; no devuelve un periodo ya pagado. La compra de por vida se paga una sola vez y no se renueva, así que no hay nada que cancelar.</p>
+<p>Si eres consumidor en la Unión Europea o en el Reino Unido, tienes un derecho de desistimiento de catorce días en la compra de contenido digital. Como el vendedor es Apple, lo ejerces ante Apple. Ese derecho se pierde cuando empiezas a usar un contenido que has pedido recibir de inmediato, que es lo que ocurre al comprar Pro porque se activa al instante; en la práctica Apple lo gestiona como una solicitud de reembolso. Los reembolsos los gestiona Apple, no nosotros: pídelo en reportaproblem.apple.com.</p>
+
+<h2>Restaurar compras</h2>
+<p>En la pantalla de Pro hay un botón «Restaurar compras». Úsalo en un iPhone nuevo o después de reinstalar la app para recuperar una compra hecha con la misma cuenta de Apple.</p>
+
+<h2>Si termina tu suscripción</h2>
+<p>Si cancelas o falla un pago, Finances sigue funcionando y vuelve a la versión gratuita. No se borra nada: lo que ya habías creado se conserva, pero no podrás añadir más allá de los límites gratuitos ni usar las funciones de Pro hasta volver a serlo. Al suscribirte de nuevo o comprar la versión de por vida, todo se desbloquea al instante.</p>
+
+<h2>Privacidad</h2>
+<p>Finances no recoge nada ni envía nada a ninguna parte. La <a href="privacitat.html">política de privacidad</a> lo explica con detalle y forma parte de estos términos.</p>
+
+<h2>Lo que no prometemos</h2>
+<p>Finances se ofrece tal cual. No garantizamos que esté libre de errores ni que siga funcionando tras una actualización del sistema operativo. Hasta donde la ley lo permite, no respondemos de pérdidas de datos, de beneficios ni de otros daños indirectos derivados del uso de la app. Nada de esto limita la responsabilidad que la ley no permite limitar, y si eres consumidor tus derechos legales no se ven afectados.</p>
+<p>«De por vida» significa mientras Finances exista y funcione en tu iPhone; no es una promesa de que se mantenga una versión, función o sistema operativo concretos.</p>
+
+<h2>Uso aceptable</h2>
+<p>No descompiles, no hagas ingeniería inversa ni redistribuyas la app más allá de lo que permitan la ley y las licencias aplicables.</p>
+
+<h2>La posición de Apple</h2>
+<p>Finances se distribuye a través de la App Store. Lo siguiente ya forma parte del contrato estándar de Apple y se repite aquí para que todo esté en una sola página.</p>
+<ul>
+<li><strong>Este contrato es con nosotros, no con Apple.</strong> Apple no es parte de estos términos. Nosotros, no Apple, somos los únicos responsables de Finances y de su contenido.</li>
+<li><strong>Alcance de la licencia.</strong> Es una licencia intransferible para usar la app en productos de marca Apple que poseas o controles, según las reglas de uso de las Condiciones de los servicios multimedia de Apple.</li>
+<li><strong>Mantenimiento y soporte.</strong> Somos los únicos responsables del mantenimiento y soporte. Apple no tiene obligación alguna de prestarlos.</li>
+<li><strong>Garantía.</strong> Somos los únicos responsables de las garantías del producto. Si la app no se ajusta a una garantía aplicable, puedes avisar a Apple y te reembolsará el precio de compra. En la medida que permita la ley, Apple no tiene ninguna otra obligación de garantía.</li>
+<li><strong>Reclamaciones sobre el producto.</strong> Somos nosotros, no Apple, quienes atendemos las reclamaciones tuyas o de terceros sobre la app o su uso, incluidas las de responsabilidad por producto, las de incumplimiento de requisitos legales y las de consumo o privacidad.</li>
+<li><strong>Propiedad intelectual.</strong> Si un tercero alega que la app infringe sus derechos, somos nosotros, no Apple, los responsables de su investigación, defensa y resolución.</li>
+<li><strong>Cumplimiento legal.</strong> Declaras que no estás en un país sujeto a embargo del Gobierno de EE. UU. ni incluido en sus listas de partes restringidas.</li>
+<li><strong>Condiciones de terceros.</strong> Debes cumplir las condiciones de terceros que apliquen al usar la app.</li>
+<li><strong>Apple como tercero beneficiario.</strong> Apple y sus filiales son terceros beneficiarios de estos términos y, al aceptarlos, pueden hacerlos valer contra ti.</li>
+</ul>
+
+<h2>A quién dirigirte</h2>
+<p>Las dudas, quejas y reclamaciones sobre Finances se dirigen a Marc García-Cuevas de Paz, El Prat de Llobregat, Barcelona, España · holafinancesapp@gmail.com.</p>
+
+<h2>Cambios en estos términos</h2>
+<p>Estos términos pueden cambiar. La versión vigente es siempre la de esta página, con su fecha. Seguir usando la app tras un cambio supone aceptar la nueva versión.</p>
+
+<h2>Ley aplicable</h2>
+<p>Estos términos se rigen por la ley española. Si eres consumidor, conservas la protección de las normas imperativas del país en que vives.</p>
+
+  </div>
+
+  <div data-lang-block="en" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Terms of Use</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances for iPhone · Effective 29 October 2026</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">These are the terms of use for Finances, an iPhone app published by Marc García-Cuevas de Paz. Downloading or using the app means accepting them.</p></div>
+
+<h2>Licence</h2>
+<p>The licence to use the app is Apple's: Finances is supplied under Apple's standard Licensed Application End User Licence Agreement, which is the end user licence agreement for this app. These terms sit alongside it and cover what the standard agreement does not: what the app does, your data, the free version, and what Finances Pro costs and how it renews. Where anything here disagrees with Apple's standard agreement about the licence itself, Apple's wording wins.</p>
+
+<h2>What the app does</h2>
+<p>Finances is a tool to record and organise your own income, spending, budgets and recurring payments. It does not connect to your bank: the data you see is the data you enter. Everything runs on your iPhone.</p>
+
+<h2>Not financial advice</h2>
+<p>Balances, totals, statistics and alerts in the app are informational and depend on what you have recorded. Finances does not give financial, tax or legal advice and does not replace your bank statements. You are responsible for checking that what you record is correct.</p>
+
+<h2>Your data and your copies</h2>
+<p>Your data is stored only on your iPhone. Because we hold no copy, you are responsible for exporting backups with «Export data» before deleting the app, changing phone or resetting the device. Exported files are not encrypted: keep them somewhere safe.</p>
+
+<h2>Free version and Finances Pro</h2>
+<p>Finances is free, with limits on the number of accounts, custom categories and recurring payments, and with some features reserved for Pro. Finances Pro removes those limits and unlocks those features. It is sold in two forms:</p>
+<ul>
+<li><strong>Finances Pro Lifetime:</strong> a one-time purchase that does not renew.</li>
+<li><strong>Finances Pro Yearly:</strong> an auto-renewing subscription, one year per period.</li>
+</ul>
+<p>There is no other difference between them. Prices are shown in the app at the moment of purchase and may differ by country: the price displayed at that moment is the one that applies.</p>
+
+<h2>Payment, renewal and cancellation</h2>
+<p>Payment is charged to your Apple Account when you confirm the purchase. The sale itself is made by Apple, not by us: your contract of sale is with Apple and Apple's Media Services Terms and Conditions govern it. Your contract for the use of the app is with us, and it is this page and Apple's licence agreement.</p>
+<p>The yearly subscription renews automatically unless auto-renewal is turned off at least 24 hours before the end of the current period. Your account is charged for the renewal within 24 hours before the end of each period, at the same price unless we have told you of a change beforehand.</p>
+<p>You can manage the subscription, and turn auto-renewal off, at any time. On your iPhone: Settings › your name › Subscriptions, or go to apps.apple.com/account/subscriptions. Cancelling stops future charges; it does not refund a period already paid for. The lifetime purchase is paid once and never renews, so there is nothing to cancel.</p>
+<p>If you are a consumer in the European Union or the United Kingdom you have a fourteen-day right of withdrawal on a purchase of digital content. Because Apple is the seller, you exercise it against Apple. The right is lost once you start using content you asked to have delivered immediately, which is what buying Pro does since it unlocks at once, so in practice Apple handles these as refund requests. Refunds are handled by Apple, not by us: ask at reportaproblem.apple.com.</p>
+
+<h2>Restoring a purchase</h2>
+<p>The Pro screen has a «Restore purchases» button. Use it on a new iPhone or after reinstalling the app to recover a purchase made with the same Apple Account.</p>
+
+<h2>If your subscription ends</h2>
+<p>If you cancel or a payment fails, Finances keeps working and returns to the free version. Nothing is deleted: what you had already created is kept, but you will not be able to add beyond the free limits or use Pro features until you are Pro again. Subscribing again, or buying the lifetime version, unlocks everything straight away.</p>
+
+<h2>Privacy</h2>
+<p>Finances collects nothing and sends nothing anywhere. The <a href="privacitat.html">Privacy Policy</a> says so in full and forms part of these terms.</p>
+
+<h2>What we do not promise</h2>
+<p>Finances is provided as it is. We do not promise that it is free of faults or that it will keep working after an operating system update. As far as the law allows, we are not liable for loss of data, loss of profit or other indirect or consequential loss arising from use of the app. Nothing here limits liability that cannot be limited by law, and if you are a consumer your statutory rights are untouched.</p>
+<p>«Lifetime» means for as long as Finances exists and runs on your iPhone; it is not a promise that any particular version, feature or operating system will be supported.</p>
+
+<h2>Acceptable use</h2>
+<p>Do not decompile, reverse engineer or redistribute the app beyond what the law and the relevant licences permit.</p>
+
+<h2>Apple's position in all this</h2>
+<p>Finances is distributed through the App Store. The points below are already part of Apple's standard licence agreement and are repeated here so that everything is on one page.</p>
+<ul>
+<li><strong>This agreement is with us, not with Apple.</strong> Apple is not a party to these terms. We, not Apple, are solely responsible for Finances and its content.</li>
+<li><strong>Scope of the licence.</strong> A non-transferable licence to use the app on Apple-branded products you own or control, as permitted by the Usage Rules in Apple's Media Services Terms and Conditions.</li>
+<li><strong>Maintenance and support.</strong> We are solely responsible for any maintenance and support. Apple has no obligation whatsoever to provide any.</li>
+<li><strong>Warranty.</strong> We are solely responsible for any product warranties. If the app fails to conform to an applicable warranty, you may notify Apple, which will refund the purchase price. To the maximum extent permitted by law, Apple has no other warranty obligation.</li>
+<li><strong>Product claims.</strong> We, not Apple, address any claims from you or a third party relating to the app or your use of it, including product liability, legal or regulatory conformity, and consumer protection or privacy claims.</li>
+<li><strong>Intellectual property.</strong> If a third party claims the app infringes their rights, we, not Apple, are responsible for the investigation, defence, settlement and discharge of that claim.</li>
+<li><strong>Legal compliance.</strong> You represent that you are not located in a country subject to a U.S. Government embargo or listed on any U.S. Government list of restricted parties.</li>
+<li><strong>Third-party terms.</strong> You must comply with any applicable third-party terms when using the app.</li>
+<li><strong>Apple as third-party beneficiary.</strong> Apple and its subsidiaries are third-party beneficiaries of these terms and, once you accept them, may enforce them against you.</li>
+</ul>
+
+<h2>Who to contact</h2>
+<p>Questions, complaints and claims about Finances should be directed to Marc García-Cuevas de Paz, El Prat de Llobregat, Barcelona, España · holafinancesapp@gmail.com.</p>
+
+<h2>Changes to these terms</h2>
+<p>These terms may change. The current version is always the one on this page, with its date. Continuing to use the app after a change means accepting the new version.</p>
+
+<h2>Governing law</h2>
+<p>These terms are governed by Spanish law. If you are a consumer, you keep the protection of the mandatory rules of the country you live in.</p>
+
+  </div>
+
+</main>
+
+<script>
+  const BACK = { ca: "Tornar a l'inici", es: 'Volver al inicio', en: 'Back to home' };
+  const TITLES = { ca: "Termes d'ús · Finances", es: 'Términos de uso · Finances', en: 'Terms of Use · Finances' };
+
+  function applyLang(lang) {
+    const supported = ['ca','es','en'];
+    if (!supported.includes(lang)) lang = 'ca';
+    localStorage.setItem('landing-lang', lang);
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang];
+
+    document.querySelectorAll('[data-lang-block]').forEach(el => {
+      el.classList.toggle('lang-visible', el.dataset.langBlock === lang);
+    });
+    var _SENYERA_T = '<svg viewBox="0 0 60 54" fill="none" style="width:14px;height:10px;flex-shrink:0;vertical-align:middle"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg>';
+    var _LP_TFLAGS = { ca: _SENYERA_T, es: '🇪🇸', en: '🇬🇧' };
+    var _lpFlagEl = document.getElementById('lp-flag-d');
+    var _lpC = document.getElementById('lp-code-d');
+    if (_lpFlagEl) _lpFlagEl.innerHTML = _LP_TFLAGS[lang] || _LP_TFLAGS.ca;
+    if (_lpC) _lpC.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lp').forEach(function(el) { el.classList.remove('open'); });
+    const lbl = document.getElementById('back-label');
+    if (lbl) lbl.textContent = BACK[lang] || BACK.ca;
+  }
+
+  (function () {
+    const saved = localStorage.getItem('landing-lang');
+    const browser = (navigator.language || 'ca').substring(0, 2);
+    const supported = ['ca','es','en'];
+    const asked = new URLSearchParams(location.search).get('lang');
+    applyLang(supported.includes(asked) ? asked : (supported.includes(saved) ? saved : (supported.includes(browser) ? browser : 'ca')));
+  })();
+
+  document.addEventListener('click', function(e) {
+    var opt = e.target.closest('.lp-opt');
+    if (opt && opt.dataset.lang) { applyLang(opt.dataset.lang); return; }
+    var trigger = e.target.closest('#lp-trigger');
+    if (trigger) { var p = trigger.closest('.lp'); if (p) { p.classList.toggle('open'); e.stopPropagation(); } return; }
+    document.querySelectorAll('.lp.open').forEach(function(el) { el.classList.remove('open'); });
+  });
+
+  // Dark mode toggle (reuse landing preference)
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('landing-theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark');
+    else if (saved === 'light') document.documentElement.classList.remove('dark');
+  });
+</script>
+
+</body>
+</html>

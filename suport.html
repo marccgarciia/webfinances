@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suport · Finances</title>
+  <meta name="description" content="Suport de Finances: preguntes freqüents, com restaurar compres, copiar les dades a un altre iPhone i com contactar amb nosaltres." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://financesapp.es/suport.html" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    };
+    (function () {
+      var saved = localStorage.getItem('landing-theme');
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else if (saved === 'light') document.documentElement.classList.remove('dark');
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .legal h2 { font-size: 1.5rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; color: rgb(17 24 39); letter-spacing: -0.02em; }
+    .dark .legal h2 { color: rgb(255 255 255); }
+    .legal h3 { font-size: 1.1rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.5rem; color: rgb(55 65 81); }
+    .dark .legal h3 { color: rgb(229 231 235); }
+    .legal p, .legal li { color: rgb(75 85 99); line-height: 1.7; margin-bottom: 0.75rem; }
+    .dark .legal p, .dark .legal li { color: rgba(255,255,255,0.6); }
+    .legal ul, .legal ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal ul { list-style: disc; }
+    .legal ol { list-style: decimal; }
+    .legal a { color: rgb(59 130 246); text-decoration: underline; }
+    .legal strong { color: rgb(31 41 55); font-weight: 600; }
+    .dark .legal strong { color: rgba(255,255,255,0.85); }
+    .legal table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .legal th, .legal td { padding: 0.6rem 0.8rem; border: 1px solid rgb(229 231 235); text-align: left; font-size: 0.875rem; }
+    .dark .legal th, .dark .legal td { border-color: rgba(255,255,255,0.08); }
+    .legal th { background: rgb(249 250 251); font-weight: 600; color: rgb(55 65 81); }
+    .dark .legal th { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.7); }
+    .lp { position:relative; display:inline-block; }
+    .lp-trigger { display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; font-size:11px; font-weight:600; color:#6b7280; padding:4px 8px; border-radius:8px; letter-spacing:0.04em; text-transform:uppercase; transition:all 0.15s; }
+    .dark .lp-trigger { color:rgba(255,255,255,0.35); }
+    .lp-trigger:hover { background:rgba(0,0,0,0.05); color:#374151; }
+    .dark .lp-trigger:hover { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); }
+    .lp-tflag { font-size:14px; line-height:1; }
+    .lp-chevron { width:8px; height:5px; flex-shrink:0; transition:transform 0.2s; }
+    .lp.open .lp-chevron { transform:rotate(180deg); }
+    .lp-drop { display:none; position:absolute; right:0; top:calc(100% + 6px); background:white; border:1px solid rgba(0,0,0,0.07); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.11),0 2px 6px rgba(0,0,0,0.05); padding:4px; min-width:130px; z-index:200; }
+    .dark .lp-drop { background:#1C1C24; border-color:rgba(255,255,255,0.08); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+    .lp.open .lp-drop { display:block; animation:lpIn 0.15s cubic-bezier(0.16,1,0.3,1) both; }
+    @keyframes lpIn { from { opacity:0; transform:translateY(-6px) scale(0.97); } to { opacity:1; transform:none; } }
+    .lp-opt { display:flex; align-items:center; gap:8px; width:100%; background:none; border:none; cursor:pointer; padding:7px 10px; border-radius:8px; transition:background 0.12s; }
+    .lp-opt:hover { background:rgba(0,0,0,0.04); }
+    .dark .lp-opt:hover { background:rgba(255,255,255,0.06); }
+    .lp-flag { font-size:14px; line-height:1; }
+    .lp-opt-code { font-size:11px; font-weight:700; letter-spacing:0.04em; color:#111827; flex:1; }
+    .dark .lp-opt-code { color:white; }
+    .lp-opt-name { font-size:11px; color:#9ca3af; }
+    svg.lp-flag { flex-shrink:0; }
+    .lp-tflag svg { width:14px; height:10px; vertical-align:middle; }
+    [data-lang-block] { display: none; }
+    [data-lang-block].lang-visible { display: block; }
+  </style>
+</head>
+<body class="bg-[#F5F5FA] dark:bg-[#0A0A0F] text-gray-900 dark:text-white">
+
+<!-- Header simple -->
+<header class="border-b border-gray-200 dark:border-white/[0.06] py-5 px-5">
+  <div class="max-w-3xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <img src="assets/logo.png" alt="Logo de Finances" class="w-7 h-7 rounded-xl object-cover" />
+      <span class="font-bold text-base">Finances</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <div class="lp" id="lp">
+        <button class="lp-trigger" id="lp-trigger">
+          <span class="lp-tflag" id="lp-flag-d"></span>
+          <span id="lp-code-d">CA</span>
+          <svg class="lp-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="lp-drop">
+          <button class="lp-opt" data-lang="ca"><svg class="lp-flag" width="18" height="12" viewBox="0 0 60 54" fill="none"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg><span class="lp-opt-code">CA</span></button>
+          <button class="lp-opt" data-lang="es"><span class="lp-flag">🇪🇸</span><span class="lp-opt-code">ES</span></button>
+          <button class="lp-opt" data-lang="en"><span class="lp-flag">🇬🇧</span><span class="lp-opt-code">EN</span></button>
+        </div>
+      </div>
+      <a href="index.html" class="text-sm text-gray-500 dark:text-white/40 hover:text-gray-900 dark:hover:text-white" id="back-link">
+        <i class="fa-solid fa-arrow-left text-xs mr-1.5"></i> <span id="back-label">Tornar a l'inici</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="py-12 px-5">
+
+  <div data-lang-block="ca" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Suport</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances per a l'iPhone</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Escriu a l'adreça de sota i et llegeix una persona. Finances la fa una sola persona, així que la resposta ve de qui va programar la part que preguntes.</p></div>
+<table><tbody><tr><th style="width:30%">Correu</th><td><a href="mailto:holafinancesapp@gmail.com">holafinancesapp@gmail.com</a></td></tr><tr><th style="width:30%">Resposta</th><td>Normalment en dos dies laborables</td></tr><tr><th style="width:30%">Idiomes</th><td>Español, Català, English</td></tr><tr><th style="width:30%">Inclou</th><td>La teva versió d'iOS, quin iPhone tens i què feies quan va fallar</td></tr></tbody></table>
+<p>No hi ha cap compte per recuperar ni contrasenya per restablir: Finances no en té. Si alguna cosa falla amb una compra, el registre el té Apple, no nosaltres: mira les preguntes sobre compres més avall.</p>
+
+<h2>Preguntes freqüents</h2>
+
+<h3>He canviat d'iPhone: com passo les meves dades?</h3>
+<p>A l'iPhone antic ves a Perfil › Exportar dades i guarda el fitxer (a Fitxers, per AirDrop o per correu). Al nou, instal·la Finances, ves a Perfil › Importar còpia i tria el fitxer. Compte: importar una còpia substitueix tot el que hi hagi a l'app en aquell moment.</p>
+
+<h3>He desinstal·lat l'app: s'han perdut les meves dades?</h3>
+<p>En desinstal·lar l'app s'esborren les seves dades de l'iPhone i no en tenim còpia a cap servidor. Si vas exportar una còpia abans, la pots recuperar amb Importar còpia. Si no, no la podem recuperar. Per això convé exportar de tant en tant.</p>
+
+<h3>He pagat i l'app em continua demanant pagar</h3>
+<p>Obre la pantalla de Pro (Perfil › Fes-te Pro) i prem «Restaurar compres». Això pregunta a Apple què té el teu compte i desbloqueja l'app. Comprova que fas servir el mateix compte d'Apple amb què vas comprar.</p>
+
+<h3>Com cancel·lo la subscripció anual?</h3>
+<p>A l'iPhone: Ajustos › el teu nom › Subscripcions › Finances Pro. També des d'apps.apple.com/account/subscriptions. Cancel·lar atura els càrrecs futurs; no retorna un període ja pagat. La compra de per vida no es renova, així que no hi ha res a cancel·lar.</p>
+
+<h3>Què passa si cancel·lo o se m'acaba Pro?</h3>
+<p>Finances continua funcionant i torna a la versió gratuïta. No s'esborra res: el que ja havies creat es conserva, però no podràs afegir més enllà dels límits gratuïts ni usar les funcions de Pro fins que ho tornis a ser.</p>
+
+<h3>Com demano un reemborsament?</h3>
+<p>Els reemborsaments els gestiona Apple, perquè és qui cobra. Demana'l a reportaproblem.apple.com. Escriu-nos també si alguna cosa no va funcionar: així és com s'arregla.</p>
+
+<h3>Se m'ha oblidat com desbloquejar l'app</h3>
+<p>El bloqueig usa Face ID, Touch ID o el codi del teu iPhone, així que no hi ha cap contrasenya de Finances per recordar. Si Face ID falla, l'app et deixa usar el codi de l'iPhone.</p>
+
+<h3>No m'arriben els avisos</h3>
+<p>Comprova que Finances té permís de notificacions a Ajustos › Notificacions › Finances i que els avisos estan activats a Perfil › Avisos. Els avisos de pagaments surten a les 9:00 del dia triat.</p>
+
+<h3>No veig el widget</h3>
+<p>Mantén premuda la pantalla d'inici, toca «+» i cerca Finances. Hi ha una mida petita i una de mitjana. Si el saldo surt borrós, és perquè tens activada l'opció d'ocultar el saldo.</p>
+
+<h3>El meu fitxer CSV no s'importa</h3>
+<p>Necessita una columna de data i una d'import. Els imports negatius s'importen com a despeses i els positius com a ingressos. Si algunes línies no es poden llegir, l'app te les mostra al final perquè les afegeixis a mà. La primera importació completa és gratuïta; a partir d'aquí cal Pro.</p>
+
+<h3>Les dades no surten del meu iPhone, segur?</h3>
+<p>L'app no fa connexions de xarxa pel seu compte i no inclou analítica ni publicitat. Les teves dades no s'envien enlloc i no es recull res sobre tu. La <a href="privacitat.html">política de privacitat</a> ho explica amb més detall.</p>
+
+  </div>
+
+  <div data-lang-block="es" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Soporte</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances para iPhone</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Escribe a la dirección de abajo y te lee una persona. Finances la hace una sola persona, así que la respuesta viene de quien programó la parte que preguntas.</p></div>
+<table><tbody><tr><th style="width:30%">Correo</th><td><a href="mailto:holafinancesapp@gmail.com">holafinancesapp@gmail.com</a></td></tr><tr><th style="width:30%">Respuesta</th><td>Normalmente en dos días laborables</td></tr><tr><th style="width:30%">Idiomas</th><td>Español, Català, English</td></tr><tr><th style="width:30%">Incluye</th><td>Tu versión de iOS, qué iPhone tienes y qué estabas haciendo cuando falló</td></tr></tbody></table>
+<p>No hay cuenta que recuperar ni contraseña que restablecer: Finances no tiene ninguna. Si algo falla con una compra, el registro lo tiene Apple, no nosotros: mira las preguntas sobre compras más abajo.</p>
+
+<h2>Preguntas frecuentes</h2>
+
+<h3>He cambiado de iPhone: ¿cómo paso mis datos?</h3>
+<p>En el iPhone antiguo ve a Perfil › Exportar datos y guarda el archivo (en Archivos, por AirDrop o por correo). En el nuevo, instala Finances, ve a Perfil › Importar copia y elige el archivo. Ojo: importar una copia sustituye todo lo que haya en la app en ese momento.</p>
+
+<h3>He desinstalado la app: ¿se han perdido mis datos?</h3>
+<p>Al desinstalar la app se borran sus datos del iPhone y no tenemos copia en ningún servidor. Si exportaste una copia antes, puedes recuperarla con Importar copia. Si no, no podemos recuperarla. Por eso conviene exportar de vez en cuando.</p>
+
+<h3>He pagado y la app me sigue pidiendo pagar</h3>
+<p>Abre la pantalla de Pro (Perfil › Hazte Pro) y pulsa «Restaurar compras». Eso pregunta a Apple qué tiene tu cuenta y desbloquea la app. Comprueba que usas la misma cuenta de Apple con la que compraste.</p>
+
+<h3>¿Cómo cancelo la suscripción anual?</h3>
+<p>En el iPhone: Ajustes › tu nombre › Suscripciones › Finances Pro. También desde apps.apple.com/account/subscriptions. Cancelar detiene los cargos futuros; no devuelve un periodo ya pagado. La compra de por vida no se renueva, así que no hay nada que cancelar.</p>
+
+<h3>¿Qué pasa si cancelo o se me acaba Pro?</h3>
+<p>Finances sigue funcionando y vuelve a la versión gratuita. No se borra nada: lo que ya habías creado se conserva, pero no podrás añadir más allá de los límites gratuitos ni usar las funciones de Pro hasta volver a serlo.</p>
+
+<h3>¿Cómo pido un reembolso?</h3>
+<p>Los reembolsos los gestiona Apple, porque es quien cobra. Pídelo en reportaproblem.apple.com. Escríbenos también si algo no funcionó: así es como se arregla.</p>
+
+<h3>Se me ha olvidado cómo desbloquear la app</h3>
+<p>El bloqueo usa Face ID, Touch ID o el código de tu iPhone, así que no hay una contraseña de Finances que recordar. Si Face ID falla, la app te deja usar el código del iPhone.</p>
+
+<h3>No me llegan los avisos</h3>
+<p>Comprueba que Finances tiene permiso de notificaciones en Ajustes › Notificaciones › Finances y que los avisos están activados en Perfil › Avisos. Los avisos de pagos salen a las 9:00 del día elegido.</p>
+
+<h3>No veo el widget</h3>
+<p>Mantén pulsada la pantalla de inicio, toca «+» y busca Finances. Hay un tamaño pequeño y uno mediano. Si el saldo sale borroso, es porque tienes activada la opción de ocultar el saldo.</p>
+
+<h3>Mi archivo CSV no se importa</h3>
+<p>Necesita una columna de fecha y otra de importe. Los importes negativos se importan como gastos y los positivos como ingresos. Si algunas líneas no se pueden leer, la app te las muestra al final para que las añadas a mano. La primera importación completa es gratuita; a partir de ahí hace falta Pro.</p>
+
+<h3>Los datos no salen de mi iPhone, ¿seguro?</h3>
+<p>La app no hace conexiones de red por su cuenta y no incluye analítica ni publicidad. Tus datos no se envían a ningún sitio y no se recoge nada sobre ti. La <a href="privacitat.html">política de privacidad</a> lo explica con más detalle.</p>
+
+  </div>
+
+  <div data-lang-block="en" class="max-w-3xl mx-auto legal">
+    <p class="text-xs font-semibold text-blue-500 uppercase tracking-[0.2em] mb-3">Legal</p>
+    
+<h1 class="text-4xl sm:text-5xl font-black tracking-tight mb-3">Support</h1>
+<p class="text-sm text-gray-400 dark:text-white/30 mb-10">Finances for iPhone</p>
+<div class="bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-5 mb-10 text-sm text-blue-900 dark:text-blue-200"><p class="text-blue-800/80 dark:text-blue-200/80" style="margin:0">Write to the address below and a person reads it. Finances is made by one person, so the answer comes from whoever wrote the part you are asking about.</p></div>
+<table><tbody><tr><th style="width:30%">Email</th><td><a href="mailto:holafinancesapp@gmail.com">holafinancesapp@gmail.com</a></td></tr><tr><th style="width:30%">Reply</th><td>Usually within two working days</td></tr><tr><th style="width:30%">Languages</th><td>Español, Català, English</td></tr><tr><th style="width:30%">Please include</th><td>Your iOS version, which iPhone you have, and what you were doing when it went wrong</td></tr></tbody></table>
+<p>There is no account to recover and no password to reset: Finances has neither. If something is wrong with a purchase, Apple holds the record of it, not us: see the questions about buying below.</p>
+
+<h2>Questions that come up most</h2>
+
+<h3>I changed iPhone: how do I move my data?</h3>
+<p>On the old iPhone go to Profile › Export data and save the file (in Files, via AirDrop or by email). On the new one, install Finances, go to Profile › Import copy and choose the file. Note that importing a copy replaces everything in the app at that moment.</p>
+
+<h3>I deleted the app: is my data gone?</h3>
+<p>Deleting the app removes its data from the iPhone, and we hold no copy on any server. If you exported a copy first, you can restore it with Import copy. If not, we cannot recover it. That is why it is worth exporting from time to time.</p>
+
+<h3>I paid and it is still asking me to pay</h3>
+<p>Open the Pro screen (Profile › Get Pro) and press «Restore purchases». It asks Apple what your account owns and unlocks the app again. Make sure you are signed in with the same Apple Account that made the purchase.</p>
+
+<h3>How do I cancel the yearly subscription?</h3>
+<p>On your iPhone: Settings › your name › Subscriptions › Finances Pro. Or go to apps.apple.com/account/subscriptions. Cancelling stops future charges; it does not refund a period already paid for. The lifetime purchase never renews, so there is nothing to cancel.</p>
+
+<h3>What happens if I cancel or Pro lapses?</h3>
+<p>Finances keeps working and returns to the free version. Nothing is deleted: what you had already created is kept, but you will not be able to add beyond the free limits or use Pro features until you are Pro again.</p>
+
+<h3>How do I get a refund?</h3>
+<p>Refunds are handled by Apple, because Apple takes the payment. Ask at reportaproblem.apple.com. Write to us as well if something did not work: that is how it gets fixed.</p>
+
+<h3>I forgot how to unlock the app</h3>
+<p>The lock uses Face ID, Touch ID or your iPhone passcode, so there is no Finances password to remember. If Face ID fails, the app lets you use the iPhone passcode.</p>
+
+<h3>I am not getting reminders</h3>
+<p>Check that Finances has notification permission in Settings › Notifications › Finances and that reminders are turned on in Profile › Reminders. Payment reminders arrive at 9:00 on the chosen day.</p>
+
+<h3>I cannot see the widget</h3>
+<p>Touch and hold the Home Screen, tap «+» and search for Finances. There is a small and a medium size. If the balance looks blurred, the hide-balance option is turned on.</p>
+
+<h3>My CSV file will not import</h3>
+<p>It needs a date column and an amount column. Negative amounts are imported as spending and positive ones as income. If some lines cannot be read, the app shows them at the end so you can add them by hand. The first complete import is free; after that Pro is required.</p>
+
+<h3>My data really stays on my iPhone?</h3>
+<p>The app makes no network connections of its own and contains no analytics or advertising. Your data is not sent anywhere and nothing is collected about you. The <a href="privacitat.html">Privacy Policy</a> explains it in more detail.</p>
+
+  </div>
+
+</main>
+
+<script>
+  const BACK = { ca: "Tornar a l'inici", es: 'Volver al inicio', en: 'Back to home' };
+  const TITLES = { ca: 'Suport · Finances', es: 'Soporte · Finances', en: 'Support · Finances' };
+
+  function applyLang(lang) {
+    const supported = ['ca','es','en'];
+    if (!supported.includes(lang)) lang = 'ca';
+    localStorage.setItem('landing-lang', lang);
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang];
+
+    document.querySelectorAll('[data-lang-block]').forEach(el => {
+      el.classList.toggle('lang-visible', el.dataset.langBlock === lang);
+    });
+    var _SENYERA_T = '<svg viewBox="0 0 60 54" fill="none" style="width:14px;height:10px;flex-shrink:0;vertical-align:middle"><rect y="0" width="60" height="6" fill="#FFC400"/><rect y="6" width="60" height="6" fill="#C60B1E"/><rect y="12" width="60" height="6" fill="#FFC400"/><rect y="18" width="60" height="6" fill="#C60B1E"/><rect y="24" width="60" height="6" fill="#FFC400"/><rect y="30" width="60" height="6" fill="#C60B1E"/><rect y="36" width="60" height="6" fill="#FFC400"/><rect y="42" width="60" height="6" fill="#C60B1E"/><rect y="48" width="60" height="6" fill="#FFC400"/></svg>';
+    var _LP_TFLAGS = { ca: _SENYERA_T, es: '🇪🇸', en: '🇬🇧' };
+    var _lpFlagEl = document.getElementById('lp-flag-d');
+    var _lpC = document.getElementById('lp-code-d');
+    if (_lpFlagEl) _lpFlagEl.innerHTML = _LP_TFLAGS[lang] || _LP_TFLAGS.ca;
+    if (_lpC) _lpC.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lp').forEach(function(el) { el.classList.remove('open'); });
+    const lbl = document.getElementById('back-label');
+    if (lbl) lbl.textContent = BACK[lang] || BACK.ca;
+  }
+
+  (function () {
+    const saved = localStorage.getItem('landing-lang');
+    const browser = (navigator.language || 'ca').substring(0, 2);
+    const supported = ['ca','es','en'];
+    const asked = new URLSearchParams(location.search).get('lang');
+    applyLang(supported.includes(asked) ? asked : (supported.includes(saved) ? saved : (supported.includes(browser) ? browser : 'ca')));
+  })();
+
+  document.addEventListener('click', function(e) {
+    var opt = e.target.closest('.lp-opt');
+    if (opt && opt.dataset.lang) { applyLang(opt.dataset.lang); return; }
+    var trigger = e.target.closest('#lp-trigger');
+    if (trigger) { var p = trigger.closest('.lp'); if (p) { p.classList.toggle('open'); e.stopPropagation(); } return; }
+    document.querySelectorAll('.lp.open').forEach(function(el) { el.classList.remove('open'); });
+  });
+
+  // Dark mode toggle (reuse landing preference)
+  document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('landing-theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark');
+    else if (saved === 'light') document.documentElement.classList.remove('dark');
+  });
+</script>
+
+</body>
+</html>

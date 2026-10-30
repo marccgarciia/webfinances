@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Asistentes de IA y buscadores con IA: bienvenidos (contenido público y sin datos de usuarios)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://financesapp.es/sitemap.xml
