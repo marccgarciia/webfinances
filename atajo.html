@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atajo de Apple Pay · Finances</title><meta name="robots" content="noindex" />
+<meta http-equiv="refresh" content="0; url=https://www.icloud.com/shortcuts/922be2c931a74a7893d935e773edd736" />
+<link rel="icon" href="/assets/logo.png" type="image/png" />
+<style>body{font-family:system-ui,-apple-system,sans-serif;background:#f5f5fa;color:#0b1020;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center;padding:1rem}
+img{width:5rem;height:5rem;border-radius:1.2rem}h1{font-size:1.4rem;margin:1rem 0 .3rem}p{margin:.2rem 0;color:#5b6476}
+a{display:inline-block;margin-top:1.2rem;padding:.8rem 1.4rem;border-radius:.9rem;background:#2563eb;color:#fff;text-decoration:none;font-weight:700}
+@media(prefers-color-scheme:dark){body{background:#0a0a0c;color:#fff}p{color:#9aa3b5}}</style></head>
+<body><main>
+<img src="/assets/logo.png" alt="Finances" />
+<h1 id="t">Abriendo el atajo…</h1>
+<p id="d">Si no se abre solo, pulsa el botón desde tu iPhone.</p>
+<a id="b" href="https://www.icloud.com/shortcuts/922be2c931a74a7893d935e773edd736">Instalar atajo</a>
+</main>
+<script>
+const L = {
+  es: ['Abriendo el atajo…', 'Si no se abre solo, pulsa el botón desde tu iPhone.', 'Instalar atajo'],
+  ca: ['Obrint la drecera…', "Si no s'obre sola, prem el botó des del teu iPhone.", 'Instal·lar drecera'],
+  en: ['Opening the shortcut…', "If it doesn't open by itself, tap the button on your iPhone.", 'Install shortcut']
+};
+const l = (navigator.language || 'es').slice(0, 2), s = L[l] || L.es;
+document.documentElement.lang = L[l] ? l : 'es';
+document.getElementById('t').textContent = s[0];
+document.getElementById('d').textContent = s[1];
+document.getElementById('b').textContent = s[2];
+location.replace(document.getElementById('b').href);
+</script></body></html>
