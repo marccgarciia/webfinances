@@ -108,238 +108,159 @@
 }
   </script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preload" as="image" href="../assets/img/home-ca.webp" fetchpriority="high" />
+  <style>
+    /* ── Sistema de diseño: azul de la app, mucho aire y tipografía protagonista ── */
+    :root { --blue:#3b82f6; --blue-l:#60a5fa; --blue-d:#1e40af; --bg:#f5f5fa; --ink:#0b1020; --mut:#5b6476; --line:rgba(15,23,42,.09); --h1a:#3b82f6; --h1b:#1e40af; --glass:rgba(245,245,250,.72); --maxw:64rem; --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,system-ui,"Segoe UI",Roboto,sans-serif; }
+    :root.dark { --bg:#0a0a0f; --ink:#f4f6fb; --mut:rgba(255,255,255,.62); --line:rgba(255,255,255,.1); --h1a:#60a5fa; --h1b:#3b82f6; --glass:rgba(10,10,15,.6); }
+    *, *::before, *::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none; -webkit-text-size-adjust:100%; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display:none; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--font); font-size:1.0625rem; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background .3s, color .3s; }
+    img, svg { display:block; max-width:100%; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; color:inherit; }
+    html, body { overflow-x:hidden; } main, .sec, .priv, .end { overflow-x:clip; }
+    .wrap { max-width:var(--maxw); margin:0 auto; padding:0 1.25rem; }
+    .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+    /* ── Navbar (la de siempre: cristal flotante con logo, idioma, tema y descarga) ── */
+    .navbar { position:fixed; top:.75rem; left:0; right:0; z-index:50; display:flex; justify-content:center; padding:0 1rem; }
+    nav { width:100%; max-width:var(--maxw); border-radius:1rem; background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(32px) saturate(180%); -webkit-backdrop-filter:blur(32px) saturate(180%); box-shadow:0 8px 32px rgba(0,0,0,.06), inset 0 1px 0 rgba(255,255,255,.5); }
+    .dark nav { box-shadow:0 8px 32px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06); }
+    .nav-in { height:3.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0 .75rem; }
+    .brand { display:flex; align-items:center; gap:.65rem; }
+    .brand img { width:1.75rem; height:1.75rem; border-radius:.5rem; }
+    .brand span { display:none; font-weight:700; letter-spacing:-.01em; font-size:1rem; }
+    .nav-r { display:flex; align-items:center; gap:.4rem; }
+    #theme-toggle { width:2rem; height:2rem; border:0; background:none; border-radius:.75rem; display:grid; place-items:center; color:var(--mut); cursor:pointer; transition:background .15s, transform .15s; }
+    #theme-toggle:hover { background:rgba(127,127,127,.12); } #theme-toggle:active { transform:scale(.88); }
+    #theme-toggle svg { width:.95rem; height:.95rem; fill:currentColor; } .dark #icon-moon, #icon-sun { display:none; } .dark #icon-sun { display:block; }
+    .lp { position:relative; } .lp-trigger { display:flex; align-items:center; gap:5px; background:none; border:0; cursor:pointer; font-size:.7rem; font-weight:600; color:var(--mut); padding:.3rem .5rem; border-radius:.5rem; letter-spacing:.04em; text-transform:uppercase; }
+    .lp-trigger:hover { background:rgba(127,127,127,.12); } .lp-tflag svg { width:14px; height:10px; vertical-align:middle; }
+    .lp-chevron { width:8px; height:5px; transition:transform .2s; } .lp.open .lp-chevron { transform:rotate(180deg); }
+    .lp-drop { display:none; position:absolute; right:0; top:calc(100% + 6px); background:#fff; border:1px solid var(--line); border-radius:.75rem; box-shadow:0 8px 24px rgba(0,0,0,.11); padding:.25rem; min-width:7.5rem; z-index:200; }
+    .dark .lp-drop { background:#1c1c24; } .lp.open .lp-drop { display:block; }
+    .lp-opt { display:flex; align-items:center; gap:.5rem; width:100%; background:none; border:0; cursor:pointer; padding:.45rem .6rem; border-radius:.5rem; }
+    .lp-opt:hover { background:rgba(127,127,127,.12); } .lp-flag { font-size:14px; line-height:1; } .lp-opt-code { font-size:.7rem; font-weight:700; letter-spacing:.04em; }
+
+    /* ── Botón de descarga (marcador provisional hasta tener la insignia oficial) ── */
+    .appbtn { display:inline-flex; align-items:center; gap:.6rem; background:#000; color:#fff; border-radius:.9rem; padding:.55rem 1.2rem .55rem 1rem; border:1px solid rgba(255,255,255,.22); transition:transform .2s, box-shadow .2s; text-align:left; }
+    .appbtn:hover { transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,.25); }
+    .appbtn svg { width:1.5rem; height:1.9rem; fill:#fff; flex:none; } .appbtn span { display:flex; flex-direction:column; line-height:1.05; }
+    .appbtn span { white-space:nowrap; } .appbtn small { font-size:.7rem; font-weight:500; } .appbtn b { font-size:1.4rem; font-weight:600; letter-spacing:-.01em; }
+    .appbtn-sm { padding:.3rem .8rem .3rem .65rem; border-radius:.7rem; gap:.4rem; } .appbtn-sm svg { width:1rem; height:1.25rem; } .appbtn-sm small { font-size:.5rem; } .appbtn-sm b { font-size:.9rem; }
+
+    /* ── Tipografía ── */
+    h1, h2 { margin:0; font-weight:800; text-wrap:balance; }
+    h1 { font-size:clamp(2.1rem, 10.8vw, 4.4rem); line-height:1; letter-spacing:-.045em; }
+    h1 .a { display:block; color:var(--h1a); } h1 .b { display:block; color:var(--h1b); }
+    h2 { font-size:clamp(2rem, 8.4vw, 3.4rem); line-height:1.04; letter-spacing:-.035em; }
+    .lead { margin:1.25rem 0 0; font-size:1.2rem; color:var(--mut); max-width:26rem; text-wrap:pretty; }
+    .idx { display:block; margin-bottom:1rem; font-size:.78rem; font-weight:700; letter-spacing:.16em; color:var(--blue); }
+
+    /* ── Halos de luz azul, muy sutiles ── */
+    .halo { position:absolute; pointer-events:none; border-radius:50%; background:radial-gradient(closest-side, rgba(59,130,246,.2), rgba(59,130,246,0)); }
+    .dark .halo { background:radial-gradient(closest-side, rgba(59,130,246,.22), rgba(59,130,246,0)); }
+
+    /* ── Portada ── */
+    .hero { position:relative; overflow:hidden; padding:6.5rem 0 0; }
+    .hero .halo { width:46rem; height:46rem; left:50%; top:-14rem; transform:translateX(-50%); }
+    .hero .wrap { position:relative; display:flex; flex-direction:column; }
+    .hero-txt { display:flex; flex-direction:column; }
+    .hero .lead { margin-top:1.4rem; } .hero .appbtn { margin-top:1.9rem; align-self:flex-start; display:none; }
+    .hero-shot { position:relative; width:min(74%,17rem); margin:2.5rem auto 0; height:clamp(19rem,90vw,29rem); overflow:hidden; -webkit-mask-image:linear-gradient(#000 74%, transparent); mask-image:linear-gradient(#000 74%, transparent); }
+    .shot-d { display:none; }
+    .dark .shot-d { display:block; }
+    .dark .shot-l { display:none; }
+    .dark .shot { box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 30px 60px -28px rgba(96,165,250,.35); }
+    .shot { width:100%; height:auto; aspect-ratio:1320/2868; border-radius:13.5% / 6.2%; box-shadow:0 30px 60px -28px rgba(30,64,175,.4); }
+
+    /* ── Secciones ── */
+    .sec { position:relative; padding:5.5rem 0 1rem; }
+    .grid { display:grid; gap:3rem; align-items:center; }
+    .vis { position:relative; display:flex; justify-content:center; }
+    .vis .halo { width:130%; aspect-ratio:1; left:50%; top:50%; transform:translate(-50%,-50%); }
+    .vis > *:not(.halo) { position:relative; }
+    .notif { display:flex; gap:.8rem; align-items:flex-start; width:100%; max-width:22rem; padding:.95rem 1.05rem; border-radius:1.4rem; background:rgba(255,255,255,.8); border:1px solid var(--line); box-shadow:0 22px 44px -26px rgba(30,64,175,.45); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+    .dark .notif { background:rgba(255,255,255,.07); }
+    .notif img { width:2.5rem; height:2.5rem; border-radius:.65rem; flex:none; }
+    .notif b { display:block; font-weight:600; font-size:.98rem; line-height:1.3; } .notif span { display:block; color:var(--mut); font-size:.92rem; margin-top:.15rem; }
+    .notif time { margin-left:auto; color:var(--mut); font-size:.78rem; flex:none; padding-top:.1rem; }
+    .chart { width:100%; max-width:30rem; height:auto; overflow:visible; }
+    .chart .base { stroke:var(--line); stroke-width:1.5; }
+    .chart .bar { transform-box:fill-box; transform-origin:50% 100%; }
+    .chart .trend { fill:none; stroke:var(--blue-d); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; }
+    .dark .chart .trend { stroke:#93c5fd; } .chart .dot { fill:#fff; stroke:var(--blue-d); stroke-width:4; } .dark .chart .dot { stroke:#93c5fd; fill:#0a0a0f; }
+    .plan-shot { width:min(70%,17rem); height:clamp(18rem,92vw,25rem); overflow:hidden; -webkit-mask-image:linear-gradient(#000 66%, transparent); mask-image:linear-gradient(#000 66%, transparent); }
+
+    /* ── Privacidad ── */
+    .priv { position:relative; padding:7rem 0 1rem; text-align:left; }
+    .priv .halo { width:40rem; height:40rem; right:-14rem; top:0; }
+    .priv .lock { width:2.6rem; height:2.6rem; margin-bottom:1.6rem; fill:none; stroke:var(--blue); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .priv h2 { white-space:pre-line; max-width:44rem; }
+    .priv ul { list-style:none; margin:2.5rem 0 0; padding:0; display:grid; border-top:1px solid var(--line); }
+    .priv li { padding:1.1rem 0; border-bottom:1px solid var(--line); font-size:1.2rem; font-weight:600; letter-spacing:-.01em; }
+
+    /* ── Cierre y pie ── */
+    .end { padding:8rem 0 6rem; text-align:center; } .end h2 { max-width:42rem; margin:0 auto; } .end .appbtn { margin-top:2.25rem; } .end p { margin:1.5rem 0 0; color:var(--mut); font-size:.98rem; }
+    footer { border-top:1px solid var(--line); padding:2.5rem 0; font-size:.88rem; color:var(--mut); }
+    .foot { display:flex; flex-direction:column; align-items:center; gap:1.25rem; text-align:center; }
+    .foot .id { display:flex; align-items:center; gap:.65rem; text-align:left; } .foot .id img { width:1.5rem; height:1.5rem; border-radius:.45rem; opacity:.8; }
+    .foot .id b { display:block; font-weight:600; color:var(--ink); } .foot .id small { font-size:.72rem; }
+    .foot nav { all:unset; display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; justify-content:center; } .foot a:hover { color:var(--ink); }
+
+    /* ── Escritorio ── */
+    @media (min-width:640px) { .brand span { display:inline; } .nav-in { padding:0 1.25rem; } .nav-r { gap:.65rem; } .appbtn-sm { padding:.3rem .8rem .3rem .65rem; } }
+    @media (min-width:900px) {
+      .wrap { padding:0 1.5rem; }
+      .foot { flex-direction:row; justify-content:space-between; gap:1.5rem; font-size:.82rem; } .foot p, .foot nav a, .foot .id small { white-space:nowrap; } .foot nav { flex-wrap:nowrap; gap:1.1rem; }
+      h1 { font-size:clamp(3.4rem, 5.6vw, 4.6rem); } h2 { font-size:clamp(2.6rem, 4.6vw, 3.6rem); }
+      .hero { padding:0; min-height:100svh; display:flex; align-items:center; } .hero .wrap { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,.75fr); align-items:center; gap:2rem; padding-top:8rem; padding-bottom:4rem; }
+      .hero-shot { margin:0 0 0 auto; width:min(100%,16.5rem); height:auto; -webkit-mask-image:linear-gradient(#000 72%, transparent 97%); mask-image:linear-gradient(#000 72%, transparent 97%); }
+      .hero .lead { font-size:1.35rem; } .hero .appbtn { display:inline-flex; }
+      .sec { padding:8rem 0 2rem; } .grid { grid-template-columns:1fr 1fr; gap:5rem; } .grid.rev .txt { order:2; }
+      .priv { padding:10rem 0 2rem; } .priv ul { grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); } .priv li { border-bottom:0; padding:1.6rem 1.5rem 0 0; }
+      .end { padding:11rem 0 8rem; }
+    }
+
+
+    /* ── Movimiento: apariciones suaves, y nada si el sistema lo pide ── */
+    .js .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+    .js .reveal.visible { opacity:1; transform:none; }
+    .js .chart .bar { transform:scaleY(0); transition:transform .9s cubic-bezier(.2,.8,.2,1) calc(var(--i) * 55ms); }
+    .js .visible .chart .bar { transform:scaleY(1); }
+    .js .chart .trend { stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.6s ease .5s; }
+    .js .visible .chart .trend { stroke-dashoffset:0; } .js .chart .dot { opacity:0; transition:opacity .4s ease 1.9s; } .js .visible .chart .dot { opacity:1; }
+    .rise { animation:rise .8s cubic-bezier(.2,.8,.2,1) both; } .rise.d1 { animation-delay:.08s; } .rise.d2 { animation-delay:.18s; } .rise.d3 { animation-delay:.3s; } .rise.d4 { animation-delay:.42s; }
+    @keyframes rise { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *, *::before, *::after { animation:none !important; transition:none !important; } .js .reveal { opacity:1; transform:none; } .js .chart .bar { transform:none; } .js .chart .trend { stroke-dashoffset:0; } .js .chart .dot { opacity:1; } }
+  </style>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
-    };
-  </script>
-  <script>
-    // Tema inicial: preferència guardada → o auto-detecció del dispositiu → o clar
+    document.documentElement.classList.add('js');
     (function () {
-      var saved = localStorage.getItem('landing-theme');
-      if (saved === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else if (saved === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
+      var saved = null; try { saved = localStorage.getItem('landing-theme'); } catch (e) {}
+      if (saved === 'dark' || (saved !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
     })();
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
-    * { -webkit-font-smoothing: antialiased; }
-
-    /* ── Liquid glass nav (igual que l'app) ── */
-    .liquid-glass {
-      backdrop-filter: blur(32px) saturate(180%);
-      -webkit-backdrop-filter: blur(32px) saturate(180%);
-      background: rgba(245,245,250,0.72);
-      border: 1px solid rgba(0,0,0,0.07);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
-    }
-    .dark .liquid-glass {
-      background: rgba(10,10,15,0.55);
-      border: 1px solid rgba(255,255,255,0.09);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-
-    /* ── Gradient text ── */
-    .gradient-text {
-      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .dark .gradient-text {
-      background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 50%, #1d4ed8 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .anim-1 { animation: fadeUp 0.6s ease both; }
-    .anim-2 { animation: fadeUp 0.6s 0.1s ease both; }
-    .anim-3 { animation: fadeUp 0.6s 0.2s ease both; }
-    .anim-4 { animation: fadeUp 0.6s 0.3s ease both; }
-    .anim-5 { animation: fadeUp 0.6s 0.4s ease both; }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0) rotate(-1.5deg); }
-      50%      { transform: translateY(-12px) rotate(-1.5deg); }
-    }
-    .floating { animation: float 5s ease-in-out infinite; }
-
-    /* ── Feature cards ── */
-    .feature-card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(59,130,246,0.12);
-    }
-
-    /* ── Buttons ── */
-    .btn-primary {
-      background: #3b82f6;
-      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
-    }
-    .btn-primary:hover { background:#2563eb; transform:translateY(-2px); box-shadow:0 8px 28px rgba(59,130,246,0.35); }
-    .btn-primary:active { transform:translateY(0); }
-
-    .btn-ghost { transition: background 0.15s, transform 0.15s; }
-    .btn-ghost:hover { background: rgba(59,130,246,0.06); transform:translateY(-2px); }
-
-    /* ── Efecte de clic al toggle de tema ── */
-    #theme-toggle { transition: background 0.15s, transform 0.15s; }
-    #theme-toggle:active { transform: scale(0.88); }
-    #theme-toggle i { transition: transform 0.2s; }
-    @keyframes themeIconSpin {
-      0%   { transform: rotate(0deg) scale(1); }
-      45%  { transform: rotate(180deg) scale(0.45); }
-      100% { transform: rotate(360deg) scale(1); }
-    }
-    .theme-toggle-anim i { animation: themeIconSpin 0.5s cubic-bezier(0.34, 1.3, 0.64, 1); }
-
-    /* ── Scroll reveal ── */
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.55s ease, transform 0.55s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-
-    /* ── Shimmer for badge ── */
-    @keyframes shimmer {
-      from { background-position:-200% center; }
-      to   { background-position:200% center; }
-    }
-    .shimmer-badge {
-      background: linear-gradient(90deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0.22) 50%, rgba(59,130,246,0.08) 100%);
-      background-size: 200% auto;
-      animation: shimmer 3s linear infinite;
-    }
-
-    /* ── Language picker ── */
-    /* Lang dropdown */
-    .lp { position:relative; display:inline-block; }
-    .lp-trigger { display:flex; align-items:center; gap:5px; background:none; border:none; cursor:pointer; font-size:11px; font-weight:600; color:#6b7280; padding:4px 8px; border-radius:8px; letter-spacing:0.04em; text-transform:uppercase; transition:all 0.15s; }
-    .dark .lp-trigger { color:rgba(255,255,255,0.35); }
-    .lp-trigger:hover { background:rgba(0,0,0,0.05); color:#374151; }
-    .dark .lp-trigger:hover { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); }
-    .lp-tflag { font-size:14px; line-height:1; }
-    .lp-chevron { width:8px; height:5px; flex-shrink:0; transition:transform 0.2s; }
-    .lp.open .lp-chevron { transform:rotate(180deg); }
-    .lp-drop { display:none; position:absolute; right:0; top:calc(100% + 6px); background:white; border:1px solid rgba(0,0,0,0.07); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.11),0 2px 6px rgba(0,0,0,0.05); padding:4px; min-width:130px; z-index:200; }
-    .dark .lp-drop { background:#1C1C24; border-color:rgba(255,255,255,0.08); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
-    .lp.open .lp-drop { display:block; animation:lpIn 0.15s cubic-bezier(0.16,1,0.3,1) both; }
-    @keyframes lpIn { from { opacity:0; transform:translateY(-6px) scale(0.97); } to { opacity:1; transform:none; } }
-    .lp-opt { display:flex; align-items:center; gap:8px; width:100%; background:none; border:none; cursor:pointer; padding:7px 10px; border-radius:8px; transition:background 0.12s; }
-    .lp-opt:hover { background:rgba(0,0,0,0.04); }
-    .dark .lp-opt:hover { background:rgba(255,255,255,0.06); }
-    .lp-flag { font-size:14px; line-height:1; }
-    .lp-opt-code { font-size:11px; font-weight:700; letter-spacing:0.04em; color:#111827; flex:1; }
-    .dark .lp-opt-code { color:white; }
-    .lp-opt-name { font-size:11px; color:#9ca3af; }
-    /* Mobile pills */
-    .lp-pill { display:flex; align-items:center; gap:4px; background:none; border:1px solid rgba(0,0,0,0.08); cursor:pointer; font-size:11px; font-weight:600; color:#9ca3af; padding:4px 9px; border-radius:8px; letter-spacing:0.04em; text-transform:uppercase; transition:all 0.15s; }
-    .dark .lp-pill { border-color:rgba(255,255,255,0.08); color:rgba(255,255,255,0.3); }
-    .lp-pill.lp-pill-active { background:#eff6ff; border-color:#bfdbfe; color:#2563eb; }
-    .dark .lp-pill.lp-pill-active { background:rgba(59,130,246,0.1); border-color:rgba(59,130,246,0.3); color:#60a5fa; }
-    .lp-pill-flag { font-size:13px; line-height:1; }
-    /* Mida SVG senyera */
-    svg.lp-flag { flex-shrink:0; }
-    .lp-tflag svg { width:14px; height:10px; vertical-align:middle; }
-  
-    /* ── Portada contundente ── */
-    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 7.5rem 1rem 4rem; }
-    .hero h1 { font-size: clamp(2.8rem, 6vw, 5.4rem); line-height: .96; letter-spacing: -.035em; font-weight: 900; }
-    .chart { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-    .chart-grid { position:absolute; inset:0; background-image: linear-gradient(to right, rgba(37,99,235,.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(37,99,235,.06) 1px, transparent 1px); background-size: 96px 96px; -webkit-mask-image: radial-gradient(ellipse at 60% 70%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse at 60% 70%, #000 0%, transparent 70%); }
-    #l_sheen { opacity:0; }
-    .chart.done #l_sheen { animation: sheen 4.2s cubic-bezier(.4,0,.3,1) infinite; }
-    @keyframes sheen { 0% { stroke-dashoffset:.05; opacity:0; } 6% { opacity:.95; } 70% { opacity:.95; } 78%,100% { stroke-dashoffset:-1.05; opacity:0; } }
-    #fill { opacity: 0; }
-    .tip { position:absolute; width:22px; height:22px; border-radius:50%; background:#fff; border:5px solid #2563eb; transform:translate(-50%,-50%); box-shadow:0 0 0 0 rgba(37,99,235,.5); opacity:0; }
-    html { scrollbar-width: none; -ms-overflow-style: none; }
-    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
-    .tip::after { content:''; position:absolute; left:50%; top:50%; width:44px; height:44px; margin:-22px 0 0 -22px; border-radius:50%; background:radial-gradient(circle, #fff 0%, rgba(147,197,253,.9) 22%, rgba(37,99,235,.45) 48%, rgba(37,99,235,0) 70%); opacity:0; pointer-events:none; }
-    .tip.flash::after { animation: flash 1.1s ease-out 1; }
-    @keyframes flash { 0% { transform:scale(.2); opacity:1; } 35% { opacity:1; } 100% { transform:scale(8); opacity:0; } }
-    .tip.on { opacity:1; animation: ping 2s ease-out infinite; }
-    @keyframes ping { 0% { box-shadow:0 0 0 0 rgba(37,99,235,.55); } 100% { box-shadow:0 0 0 34px rgba(37,99,235,0); } }
-    .appbtn { align-self:flex-start; }
-    @media (max-width: 639px) {
-      .hero { justify-content:center; padding-top:5rem; padding-bottom:38%; }
-      .hero h1 { font-size:7.9vw; margin-bottom:1.1rem; }
-      .hero .appbtn { display:none; }
-      .hero .anim-3 { margin-bottom:0; font-size:1.15rem; }
-      .chart { inset:auto 0 0 0; height:50%; }
-      .appbtn-lg { padding:.5rem 1.1rem .5rem .9rem; border-radius:.9rem; gap:.6rem; }
-      .appbtn-lg i { font-size:1.9rem; } .appbtn-lg small { font-size:.68rem; } .appbtn-lg b { font-size:1.3rem; }
-    }
-    .appbtn { display:inline-flex; align-items:center; gap:.7rem; background:#000; color:#fff; border-radius:.9rem; padding:.55rem 1.3rem .55rem 1.1rem; border:1px solid rgba(255,255,255,.28); box-shadow:0 14px 40px rgba(0,0,0,.28); transition:transform .15s, box-shadow .15s; text-align:left; }
-    .appbtn:hover { transform:translateY(-3px); box-shadow:0 20px 50px rgba(0,0,0,.35); }
-    .appbtn i { font-size:2rem; line-height:1; }
-    .appbtn span { display:flex; flex-direction:column; line-height:1.05; }
-    .appbtn small { font-size:.72rem; font-weight:500; }
-    .appbtn b { font-size:1.45rem; font-weight:600; letter-spacing:-.01em; }
-    .appbtn-lg { padding:.8rem 2rem .8rem 1.6rem; border-radius:1.1rem; gap:1rem; }
-    .appbtn-lg i { font-size:2.8rem; } .appbtn-lg small { font-size:.9rem; } .appbtn-lg b { font-size:2rem; }
-    .appbtn-sm { padding:.3rem .8rem .3rem .65rem; border-radius:.7rem; gap:.45rem; box-shadow:none; }
-    .appbtn-sm i { font-size:1.25rem; } .appbtn-sm small { font-size:.5rem; } .appbtn-sm b { font-size:.9rem; }
-    .dl { display:inline-flex; align-items:center; justify-content:center; gap:.6rem; background:#2563eb; color:#fff; font-weight:800; font-size:clamp(1.05rem,2.4vw,1.35rem); padding:1.15rem 2.4rem; border-radius:1.25rem; box-shadow:0 18px 50px rgba(37,99,235,.42); transition: transform .15s, box-shadow .15s, background .15s; cursor:default; user-select:none; }
-    .dl:hover { background:#1d4ed8; transform:translateY(-3px); box-shadow:0 24px 60px rgba(37,99,235,.5); }
-    .dl-lg { font-size:clamp(1.15rem,3vw,1.6rem); padding:1.4rem 3rem; }
-    .chips { display:flex; flex-wrap:wrap; gap:.6rem; }
-    .chip { border:1px solid rgba(37,99,235,.25); background:rgba(37,99,235,.07); color:#1d4ed8; border-radius:9999px; padding:.5rem 1rem; font-weight:600; font-size:.9rem; }
-    .dark .chip { color:#93c5fd; border-color:rgba(147,197,253,.25); background:rgba(59,130,246,.1); }
-    @media (max-width: 639px) { #seguretat .chips { gap:.25rem; flex-wrap:nowrap; margin-inline:-.5rem; justify-content:center; } #seguretat .chip { font-size:2.45vw !important; padding:.28rem .5rem !important; white-space:nowrap; } }
-    @media (min-width: 640px) { #seguretat h2 { white-space: pre-line; } }
-    .f3c { display:flex; gap:1rem; align-items:flex-start; }
-    .f3i { display:none; }
-    @media (max-width: 767px) {
-      .f3c { align-items:center; gap:1rem; padding:1rem 1.1rem; border-radius:1.25rem; background:rgba(255,255,255,.7); border:1px solid rgba(37,99,235,.12); box-shadow:0 8px 28px rgba(37,99,235,.08); }
-      :root.dark .f3c, .dark .f3c { background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.08); box-shadow:none; }
-      .f3i { display:flex; flex:none; width:3rem; height:3rem; border-radius:.9rem; align-items:center; justify-content:center; color:#fff; font-size:1.35rem; background:linear-gradient(145deg,#60a5fa,#1d4ed8); }
-      .big3 { gap:.8rem !important; }
-      .big3 h2 { font-size:1.2rem !important; margin-bottom:.2rem !important; line-height:1.15; }
-      .big3 p { font-size:.95rem !important; line-height:1.35; }
-    }
-    .big3 h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height:1.05; letter-spacing:-.025em; font-weight:900; }
-    @media (prefers-reduced-motion: reduce) { .anim-1,.anim-2,.anim-3,.anim-4,.anim-5,.tip.on { animation:none !important; } .reveal { opacity:1; transform:none; transition:none; } }
-  </style>
 </head>
 
-<body class="bg-[#F5F5FA] dark:bg-[#0A0A0F] text-gray-900 dark:text-white font-sans overflow-x-hidden transition-colors duration-300">
+<body>
 
-<!-- ==========================================================
-     NAV — Liquid Glass flotant
-========================================================== -->
-<div class="fixed top-3 inset-x-0 z-50 flex justify-center px-4">
-  <nav class="liquid-glass rounded-2xl w-full max-w-5xl">
-    <div class="px-3 sm:px-5 h-14 flex items-center justify-between gap-4">
-
-      <a href="#" class="flex items-center gap-2.5 shrink-0">
-        <img src="../assets/logo.png" alt="Logo de Finances" class="w-7 h-7 rounded-xl object-cover"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-        <span class="hidden w-7 h-7 rounded-xl bg-blue-500 items-center justify-center text-xs font-bold text-white shrink-0">F</span>
-        <span class="hidden sm:inline font-bold text-gray-900 dark:text-white text-base tracking-tight">Finances</span>
+<!-- NAV — cristal flotante, igual que la app -->
+<div class="navbar">
+  <nav>
+    <div class="nav-in">
+      <a href="#" class="brand" aria-label="Finances">
+        <img src="../assets/logo.png" alt="Logo de Finances" width="28" height="28" />
+        <span>Finances</span>
       </a>
-
-
-      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-        <!-- Language picker (desktop) -->
+      <div class="nav-r">
         <div class="lp" id="lp-desk">
-          <button class="lp-trigger" id="lp-trigger">
+          <button class="lp-trigger" id="lp-trigger" aria-label="Idioma" aria-haspopup="true">
             <span class="lp-tflag" id="lp-desk-flag"></span>
-            <span id="lp-desk-code">CA</span>
+            <span id="lp-desk-code">ES</span>
             <svg class="lp-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
           </button>
           <div class="lp-drop">
@@ -348,131 +269,147 @@
             <button class="lp-opt" data-lang="en"><span class="lp-flag">🇬🇧</span><span class="lp-opt-code">EN</span></button>
           </div>
         </div>
-
-        <!-- Dark mode toggle -->
-        <button id="theme-toggle" aria-label="Canviar tema"
-          class="w-8 h-8 rounded-xl flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/10 transition-all">
-          <i id="icon-sun" class="fa-solid fa-sun hidden dark:block text-sm"></i>
-          <i id="icon-moon" class="fa-solid fa-moon block dark:hidden text-sm"></i>
+        <button id="theme-toggle" aria-label="Modo claro u oscuro">
+          <svg id="icon-sun" viewBox="0 0 512 512" aria-hidden="true"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg>
+          <svg id="icon-moon" viewBox="0 0 384 512" aria-hidden="true"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
         </button>
-
-        <a href="#" class="appbtn appbtn-sm" aria-label="App Store"><i class="fa-brands fa-apple"></i><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a>
-
+        <a href="#" class="appbtn appbtn-sm" aria-label="App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a>
       </div>
     </div>
-
   </nav>
 </div>
 
-
-
-<!-- ==========================================================
-     HERO — pantalla completa, gráfico recorriendo la pantalla
-========================================================== -->
+<main>
+<!-- PORTADA -->
 <section class="hero">
-  <div class="chart-grid"></div>
-  <div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-blue-500/10 dark:bg-blue-500/15 blur-[130px]"></div>
-  <svg class="chart" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="gl" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#93c5fd"/><stop offset=".55" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
-      <linearGradient id="gf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity=".30"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>
-      <filter id="blur" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
-      <filter id="glow" x="-5%" y="-50%" width="110%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
-      <linearGradient id="ge" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#60a5fa"/><stop offset=".6" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
-      <clipPath id="reveal"><rect id="rv" x="0" y="0" width="0" height="900"/></clipPath>
-    </defs>
-    <g transform="translate(0 -50)">
-    <path id="area" clip-path="url(#reveal)" fill="url(#gf)" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162 L1440 900 L0 900 Z"/>
-    <g clip-path="url(#reveal)">
-    <path id="l_sh" pathLength="1" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" stroke="#1e3a8a" stroke-width="16" opacity=".28" filter="url(#blur)" transform="translate(0 26)" class="ly" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162"/>
-    <path id="l_ed" pathLength="1" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" stroke="url(#ge)" stroke-width="13" transform="translate(0 3)" class="ly" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162"/>
-    <path id="ln" pathLength="1" fill="none" stroke="url(#gl)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162"/>
-    <path id="l_hl" pathLength="1" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" stroke="#fff" stroke-width="3" opacity=".6" transform="translate(0 -3)" class="ly" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162"/>
-    <path id="l_sheen" pathLength="1" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" filter="url(#glow)" stroke-dasharray="0.05 3" stroke-dashoffset="0.05" opacity="0" d="M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162"/>
-    </g>
-    </g>
-  </svg>
-  <div class="tip" id="tip"></div>
-
-  <div class="relative max-w-5xl mx-auto w-full">
-    <h1 class="anim-2 mb-6 sm:mb-8">
-      <span class="gradient-text block" data-i18n="h1a">la teva actitud suma.</span>
-      <span class="block" data-i18n="h1b">els hàbits multipliquen.</span>
-    </h1>
-    <p class="anim-3 text-xl sm:text-2xl lg:text-3xl text-gray-500 dark:text-white/60 max-w-2xl mb-9 sm:mb-11 font-medium" data-i18n="hero_sub">La manera intel·ligent de gestionar les teves finances.</p>
-    <div class="anim-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-      <a href="#" class="appbtn appbtn-lg" aria-label="App Store"><i class="fa-brands fa-apple"></i><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a>
+  <div class="halo"></div>
+  <div class="wrap">
+    <div class="hero-txt">
+    <h1 class="rise d1"><span class="a" data-i18n="h1a">la teva actitud suma.</span><span class="b" data-i18n="h1b">els hàbits multipliquen.</span></h1>
+    <p class="lead rise d2" data-i18n="hero_sub">La manera intel·ligent de gestionar les teves finances.</p>
+    <div class="rise d3"><a href="#" class="appbtn " aria-label="App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a></div>
     </div>
+    <figure class="hero-shot rise d4" style="margin-bottom:0">
+      <img class="shot shot-l" src="../assets/img/home-ca.webp" width="960" height="2087" alt="" fetchpriority="high" />
+        <img class="shot shot-d" src="../assets/img/home-dark-ca.webp" width="960" height="2087" alt="" loading="lazy" />
+      <figcaption class="sr" data-i18n="img_home">Pantalla d'inici de Finances amb el saldo total i els comptes.</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- ==========================================================
-     TRES IDEAS (muy cortas)
-========================================================== -->
-<section id="idees" class="py-20 sm:py-28 px-4">
-  <div class="max-w-5xl mx-auto">
-    <div class="big3 reveal grid md:grid-cols-3 gap-10 md:gap-8">
-      <div class="f3c"><span class="f3i"><i class="fa-brands fa-apple-pay"></i></span><div><h2 class="gradient-text mb-3" data-i18n="f1_t">Apple Pay, apuntat sol.</h2><p class="text-lg text-gray-500 dark:text-white/55" data-i18n="f1_p">Pagues amb el mòbil i la despesa apareix a l'app.</p></div></div>
-      <div class="f3c"><span class="f3i"><i class="fa-solid fa-chart-line"></i></span><div><h2 class="gradient-text mb-3" data-i18n="f2_t">Mira com evoluciones.</h2><p class="text-lg text-gray-500 dark:text-white/55" data-i18n="f2_p">Mes a mes i any a any, sense fulls de càlcul.</p></div></div>
-      <div class="f3c"><span class="f3i"><i class="fa-solid fa-sliders"></i></span><div><h2 class="gradient-text mb-3" data-i18n="f3_t">El teu mes, a la teva manera.</h2><p class="text-lg text-gray-500 dark:text-white/55" data-i18n="f3_p">Decideix quant gastar a cada categoria.</p></div></div>
+<!-- APPLE PAY -->
+<section class="sec" id="applepay">
+  <div class="wrap grid">
+    <div class="txt reveal">
+      <span class="idx">01</span>
+      <h2 data-i18n="f1_t">Apple Pay registra sol.</h2>
+      <p class="lead" data-i18n="f1_p">Pagues amb el mòbil i la despesa apareix a l'app.</p>
     </div>
-  </div>
-</section>
-
-<!-- ==========================================================
-     PRIVACIDAD (una franja)
-========================================================== -->
-<section id="seguretat" class="px-4 pb-20 sm:pb-28">
-  <div class="reveal max-w-5xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] px-5 py-6 sm:px-12 sm:py-14" style="background:linear-gradient(145deg,#0b1a60 0%,#1d4ed8 100%)">
-    <h2 class="text-[1.45rem] sm:text-5xl font-black tracking-tight leading-[1.08] text-white mb-4 sm:mb-6" data-i18n="p_t">les teves finances. les teves decisions.
-la teva privacitat.</h2>
-    <div class="chips"><span class="chip !bg-white/10 !text-white !border-white/25" data-i18n="p_1">Sense registre</span><span class="chip !bg-white/10 !text-white !border-white/25" data-i18n="p_2">Sense connectar el banc</span><span class="chip !bg-white/10 !text-white !border-white/25" data-i18n="p_3">Les teves dades, al teu iPhone</span></div>
-  </div>
-</section>
-
-<!-- ==========================================================
-     CIERRE — descarga
-========================================================== -->
-<section class="px-4 pb-24 sm:pb-32">
-  <div class="reveal max-w-4xl mx-auto text-center">
-    <h2 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.02] mb-8"><span class="gradient-text" data-i18n="end_t">La manera intel·ligent de gestionar les teves finances.</span></h2>
-    <a href="#" class="appbtn appbtn-lg" aria-label="App Store"><i class="fa-brands fa-apple"></i><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a>
-    <p class="mt-6 text-gray-400 dark:text-white/40" data-i18n="end_p">Ofereix compres dins de l'app.</p>
-  </div>
-</section>
-
-<!-- ==========================================================
-     FOOTER
-========================================================== -->
-<footer class="border-t border-gray-200 dark:border-white/[0.06] py-10 px-4">
-  <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400 dark:text-white/25">
-    <div class="flex items-center gap-2.5">
-      <img src="../assets/logo.png" alt="Logo de Finances" class="w-6 h-6 rounded-lg opacity-60" onerror="this.style.display='none'" />
-      <div class="flex flex-col">
-        <span class="font-semibold text-gray-500 dark:text-white/40">Finances</span>
-        <span class="text-[11px] text-gray-400 dark:text-white/25" data-i18n="footer_tagline">Creat per simplificar les finances personals</span>
+    <div class="vis reveal">
+      <div class="halo"></div>
+      <div class="notif" role="img" aria-labelledby="notif-t">
+        <img src="../assets/logo.png" alt="" width="40" height="40" loading="lazy" />
+        <div><b id="notif-t" data-i18n="n_t">🍽️ Despesa apuntada: 29,77 € a Restaurants</b><span data-i18n="n_p">Toca per revisar-la.</span></div>
+        <time data-i18n="n_now">ara</time>
       </div>
     </div>
-    <p data-i18n="footer_copyright">© 2026 Finances. Tots els drets reservats.</p>
-    <div class="flex gap-6 flex-wrap justify-center">
-      <a href="../privacitat.html" class="hover:text-gray-600 dark:hover:text-white/50 transition-colors" data-i18n="footer_privacy">Privacitat</a>
-      <a href="../termes.html" class="hover:text-gray-600 dark:hover:text-white/50 transition-colors" data-i18n="footer_terms">Termes</a>
-      <a href="../avis-legal.html" class="hover:text-gray-600 dark:hover:text-white/50 transition-colors" data-i18n="footer_legal">Avís legal</a>
-      <a href="../suport.html" class="hover:text-gray-600 dark:hover:text-white/50 transition-colors" data-i18n="footer_contact">Suport</a>
+  </div>
+</section>
+
+<!-- EVOLUCIÓN -->
+<section class="sec" id="evolucion">
+  <div class="wrap grid rev">
+    <div class="txt reveal">
+      <span class="idx">02</span>
+      <h2 data-i18n="f2_t">Mira com evoluciones.</h2>
+      <p class="lead" data-i18n="f2_p">Mes a mes i any a any, sense fulls de càlcul.</p>
+    </div>
+    <div class="vis reveal">
+      <div class="halo"></div>
+      <figure style="margin:0;width:100%;display:flex;justify-content:center">
+        <span class="sr" id="chart-t" data-i18n="chart_t">Gràfic de barres que puja mes a mes: la teva evolució.</span>
+        <svg class="chart" viewBox="0 0 520 270" role="img" aria-labelledby="chart-t" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6" stop-opacity=".55"/></linearGradient></defs>
+          <line x1="0" y1="252" x2="520" y2="252" class="base"/>
+          <g fill="url(#bg)"><rect class="bar" style="--i:0" x="14" y="179" width="28" height="71" rx="9"/><rect class="bar" style="--i:1" x="56" y="166" width="28" height="84" rx="9"/><rect class="bar" style="--i:2" x="98" y="170" width="28" height="80" rx="9"/><rect class="bar" style="--i:3" x="140" y="149" width="28" height="101" rx="9"/><rect class="bar" style="--i:4" x="182" y="141" width="28" height="109" rx="9"/><rect class="bar" style="--i:5" x="224" y="145" width="28" height="105" rx="9"/><rect class="bar" style="--i:6" x="266" y="120" width="28" height="130" rx="9"/><rect class="bar" style="--i:7" x="308" y="111" width="28" height="139" rx="9"/><rect class="bar" style="--i:8" x="350" y="116" width="28" height="134" rx="9"/><rect class="bar" style="--i:9" x="392" y="86" width="28" height="164" rx="9"/><rect class="bar" style="--i:10" x="434" y="74" width="28" height="176" rx="9"/><rect class="bar" style="--i:11" x="476" y="48" width="28" height="202" rx="9"/></g>
+          <path class="trend" pathLength="1" d="M28 165 L70 152 L112 156 L154 135 L196 127 L238 131 L280 106 L322 97 L364 102 L406 72 L448 60 L490 34"/>
+          <circle class="dot" cx="490" cy="34" r="6"/>
+        </svg>
+      </figure>
     </div>
   </div>
+</section>
+
+<!-- PRESUPUESTO -->
+<section class="sec" id="presupuesto">
+  <div class="wrap grid">
+    <div class="txt reveal">
+      <span class="idx">03</span>
+      <h2 data-i18n="f3_t">El teu mes, a la teva manera.</h2>
+      <p class="lead" data-i18n="f3_p">Decideix quant gastar a cada categoria.</p>
+    </div>
+    <div class="vis reveal">
+      <div class="halo"></div>
+      <figure class="plan-shot" style="margin:0">
+        <img class="shot shot-l" src="../assets/img/plan-ca.webp" width="960" height="2087" alt="" loading="lazy" />
+        <img class="shot shot-d" src="../assets/img/plan-dark-ca.webp" width="960" height="2087" alt="" loading="lazy" />
+        <figcaption class="sr" data-i18n="img_plan">Pantalla de pressupost de Finances amb les categories de despesa.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACIDAD -->
+<section class="priv" id="privacidad">
+  <div class="halo"></div>
+  <div class="wrap reveal">
+    <svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+    <h2 data-i18n="p_t">les teves finances. les teves decisions.
+la teva privacitat.</h2>
+    <ul>
+      <li data-i18n="p_1">Sense registre</li>
+      <li data-i18n="p_2">Sense connectar el banc</li>
+      <li data-i18n="p_3">Les teves dades, al teu iPhone</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="end">
+  <div class="wrap reveal">
+    <h2 data-i18n="end_t">La manera intel·ligent de gestionar les teves finances.</h2>
+    <a href="#" class="appbtn " aria-label="App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span><small data-i18n="dl_small">Descarrega a l'</small><b>App Store</b></span></a>
+    <p data-i18n="end_p">Ofereix compres dins de l'app.</p>
+  </div>
+</section>
+</main>
+
+<!-- PIE -->
+<footer>
+  <div class="wrap foot">
+    <div class="id">
+      <img src="../assets/logo.png" alt="" width="24" height="24" loading="lazy" />
+      <div><b>Finances</b><small data-i18n="footer_tagline">Creat per simplificar les finances personals</small></div>
+    </div>
+    <p style="margin:0" data-i18n="footer_copyright">© 2026 Finances. Tots els drets reservats.</p>
+    <nav aria-label="Legal">
+      <a href="../privacitat.html" data-i18n="footer_privacy">Privacitat</a>
+      <a href="../termes.html" data-i18n="footer_terms">Termes</a>
+      <a href="../avis-legal.html" data-i18n="footer_legal">Avís legal</a>
+      <a href="../suport.html" data-i18n="footer_contact">Suport</a>
+    </nav>
+  </div>
 </footer>
-
-
 
 <script>
 const DICT = {
   es: {
-    nav_features:'Cómo funciona', nav_privacy:'Privacidad', nav_support:'Soporte', nav_cta:'', dl_small:'Descargar en el',
-    soon:'Muy pronto en el App Store', soon_btn:'Muy pronto en el App Store', soon_btn2:'Muy pronto en el App Store',
-    h1a:'tu actitud suma.', h1b:'tus hábitos multiplican.', hero_sub:'La forma inteligente de gestionar tus finanzas.', trust:'Solo iPhone · Gratis para empezar',
-    f1_t:'Apple Pay, apuntado solo.', f1_p:'Pagas con el móvil y el gasto aparece en la app.',
-    f2_t:'Mira cómo evolucionas.', f2_p:'Mes a mes y año a año, sin hojas de cálculo.',
+    dl_small:'Descargar en el',
+    h1a:'tu actitud suma.', h1b:'tus hábitos multiplican.', hero_sub:'La forma inteligente de gestionar tus finanzas.',
+    img_home:'Pantalla de inicio de Finances con el saldo total y las cuentas.', img_plan:'Pantalla de presupuesto de Finances con las categorías de gasto.',
+    f1_t:'Apple Pay registra solo.', f1_p:'Pagas con el móvil y el gasto aparece en la app.',
+    n_t:'🍽️ Gasto apuntado: 29,77 € en Restaurantes', n_p:'Toca para revisarlo.', n_now:'ahora',
+    f2_t:'Mira cómo evolucionas.', f2_p:'Mes a mes y año a año, sin hojas de cálculo.', chart_t:'Gráfico de barras que sube mes a mes: tu evolución.',
     f3_t:'Tu mes, a tu manera.', f3_p:'Decide cuánto gastar en cada categoría.',
     p_t:'tus finanzas. tus decisiones.\ntu privacidad.', p_1:'Sin registro', p_2:'Sin conectar el banco', p_3:'Tus datos, en tu iPhone',
     end_t:'La forma inteligente de gestionar tus finanzas.', end_p:'Ofrece compras dentro de la app.',
@@ -481,11 +418,12 @@ const DICT = {
     t_title:'Finances · La manera intel·ligent de gestionar les teves finances'
   },
   ca: {
-    nav_features:'Com funciona', nav_privacy:'Privacitat', nav_support:'Suport', nav_cta:"", dl_small:"Descarrega a l'",
-    soon:"Aviat a l'App Store", soon_btn:"Aviat a l'App Store", soon_btn2:"Aviat a l'App Store",
-    h1a:'la teva actitud suma.', h1b:'els hàbits multipliquen.', hero_sub:'La manera intel·ligent de gestionar les teves finances.', trust:'Només iPhone · Gratuïta per començar',
-    f1_t:'Apple Pay, apuntat sol.', f1_p:"Pagues amb el mòbil i la despesa apareix a l'app.",
-    f2_t:'Mira com evoluciones.', f2_p:'Mes a mes i any a any, sense fulls de càlcul.',
+    dl_small:"Descarrega a l'",
+    h1a:'la teva actitud suma.', h1b:'els hàbits multipliquen.', hero_sub:'La manera intel·ligent de gestionar les teves finances.',
+    img_home:"Pantalla d'inici de Finances amb el saldo total i els comptes.", img_plan:'Pantalla de pressupost de Finances amb les categories de despesa.',
+    f1_t:'Apple Pay registra sol.', f1_p:"Pagues amb el mòbil i la despesa apareix a l'app.",
+    n_t:'🍽️ Despesa apuntada: 29,77 € a Restaurants', n_p:'Toca per revisar-la.', n_now:'ara',
+    f2_t:'Mira com evoluciones.', f2_p:'Mes a mes i any a any, sense fulls de càlcul.', chart_t:'Gràfic de barres que puja mes a mes: la teva evolució.',
     f3_t:'El teu mes, a la teva manera.', f3_p:'Decideix quant gastar a cada categoria.',
     p_t:'les teves finances. les teves decisions.\nla teva privacitat.', p_1:'Sense registre', p_2:'Sense connectar el banc', p_3:'Les teves dades, al teu iPhone',
     end_t:'La manera intel·ligent de gestionar les teves finances.', end_p:"Ofereix compres dins de l'app.",
@@ -494,11 +432,12 @@ const DICT = {
     t_title:'Finances · La manera intel·ligent de gestionar les teves finances'
   },
   en: {
-    nav_features:'How it works', nav_privacy:'Privacy', nav_support:'Support', nav_cta:'', dl_small:'Download on the',
-    soon:'Coming soon to the App Store', soon_btn:'Coming soon to the App Store', soon_btn2:'Coming soon to the App Store',
-    h1a:'your attitude adds up.', h1b:'your habits multiply.', hero_sub:'The smart way to manage your finances.', trust:'iPhone only · Free to start',
-    f1_t:'Apple Pay, logged for you.', f1_p:'You pay with your phone and the expense shows up in the app.',
-    f2_t:'See how you evolve.', f2_p:'Month by month, year by year, no spreadsheets.',
+    dl_small:'Download on the',
+    h1a:'your attitude adds up.', h1b:'your habits multiply.', hero_sub:'The smart way to manage your finances.',
+    img_home:'Finances home screen with the total balance and accounts.', img_plan:'Finances budget screen with spending categories.',
+    f1_t:'Apple Pay logs it for you.', f1_p:'You pay with your phone and the expense shows up in the app.',
+    n_t:'🍽️ Expense logged: €29.77 in Restaurants', n_p:'Tap to review it.', n_now:'now',
+    f2_t:'See how you evolve.', f2_p:'Month by month, year by year, no spreadsheets.', chart_t:'Bar chart rising month by month: your progress.',
     f3_t:'Your month, your way.', f3_p:'Decide how much to spend in each category.',
     p_t:'your finances. your decisions.\nyour privacy.', p_1:'No sign-up', p_2:'No bank connection', p_3:'Your data stays on your iPhone',
     end_t:'The smart way to manage your finances.', end_p:'Offers in-app purchases.',
@@ -522,22 +461,11 @@ function applyLang(lang) {
   var desk = document.getElementById('lp-desk-code'); if (desk) desk.textContent = lang.toUpperCase();
   var flag = document.getElementById('lp-desk-flag'), opt = document.querySelector('#lp-desk .lp-opt[data-lang="' + lang + '"] .lp-flag');
   if (flag && opt) flag.innerHTML = opt.outerHTML;
-  document.querySelectorAll('.lp-pill').forEach(function (p) { p.classList.toggle('lp-pill-active', p.dataset.lang === lang); });
-  fitChips();
 }
-// en móvil las tres etiquetas de privacidad van en una sola línea: se reduce la letra hasta que quepan
-function fitChips() {
-  var c = document.querySelector('#seguretat .chips'); if (!c) return;
-  var ch = [].slice.call(c.children);
-  ch.forEach(function (e) { e.style.removeProperty('font-size'); });
-  if (window.innerWidth >= 640) return;
-  var fs = parseFloat(getComputedStyle(ch[0]).fontSize);
-  while (c.scrollWidth > c.clientWidth && fs > 6.5) { fs -= .25; ch.forEach(function (e) { e.style.setProperty('font-size', fs + 'px', 'important'); }); }
-}
-window.addEventListener('resize', fitChips);
 function setLang(lang) {
   try { localStorage.setItem(KEY, lang); } catch (e) {}
-  location.href = (document.documentElement.dataset.root || '') + (lang === 'es' ? '' : lang + '/');
+  // al abrir el archivo desde el disco (file://) las carpetas no se abren solas: se añade index.html
+  location.href = (document.documentElement.dataset.root || '') + (lang === 'es' ? '' : lang + '/') + (location.protocol === 'file:' ? 'index.html' : '');
 }
 document.querySelectorAll('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); document.getElementById('lp-desk').classList.remove('open'); }); });
 document.getElementById('lp-trigger').addEventListener('click', function (e) { e.stopPropagation(); document.getElementById('lp-desk').classList.toggle('open'); });
@@ -545,42 +473,14 @@ document.addEventListener('click', function () { document.getElementById('lp-des
 try { localStorage.setItem(KEY, pickLang()); } catch (e) {}
 applyLang(pickLang());
 
-// gráfico que recorre la pantalla
-(function () {
-  var ln = document.getElementById('ln'), rv = document.getElementById('rv'), area = document.getElementById('area'), tip = document.getElementById('tip');
-  var DD = 'M0 810 C80 808 140 806 216 798 S380 786 475 770 S620 742 720 722 S820 696 893 674 S980 640 1037 610 S1100 580 1152 546 S1230 450 1296 370 S1390 240 1440 162';
-  var DM = 'M0 786 C100 770 190 744 288 738 S470 690 547 674 S650 700 720 690 S880 560 979 490 S1100 400 1181 354 S1340 220 1440 130';
-  var mq = window.matchMedia('(max-width: 639px)'), curD = null;
-  function setPath() {
-    var d = mq.matches ? DM : DD; if (d === curD) return; curD = d;
-    ['area', 'l_sh', 'l_ed', 'ln', 'l_hl', 'l_sheen'].forEach(function (id) { document.getElementById(id).setAttribute('d', id === 'area' ? d + ' L1440 900 L0 900 Z' : d); });
-    len = document.getElementById('ln').getTotalLength();
-  }
-  var ly = [].slice.call(document.querySelectorAll('.ly')), svg = document.querySelector('.chart'), W = 1440, H = 800, len = ln.getTotalLength(), END = 1;
-  setPath();
-  function place(k) {
-    var p = ln.getPointAtLength(len * k), box = svg.getBoundingClientRect(), hero = svg.parentElement.getBoundingClientRect();
-    tip.style.left = (box.left - hero.left + p.x / W * box.width) + 'px';
-    tip.style.top = (box.top - hero.top + (p.y - 50) / H * box.height) + 'px';
-    rv.setAttribute('width', p.x + 6);
-  }
-  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  area.style.transition = 'opacity .8s ease'; area.style.opacity = 1;
-  if (still) { place(END); tip.classList.add('on'); return; }
-  var t0 = null, dur = 3400;
-  function f(ts) { if (t0 === null) t0 = ts; var k = Math.min(1, (ts - t0) / dur), e = (1 - Math.pow(1 - k, 2.2)) * END; place(e); tip.style.opacity = 1; if (k < 1) requestAnimationFrame(f); else { tip.classList.add('on', 'flash'); svg.classList.add('done'); } }
-  setTimeout(function () { requestAnimationFrame(f); }, 350);
-  window.addEventListener('resize', function () { setPath(); place(END); });
-})();
-
 // tema
 document.getElementById('theme-toggle').addEventListener('click', function () {
   var dark = document.documentElement.classList.toggle('dark');
   try { localStorage.setItem('landing-theme', dark ? 'dark' : 'light'); } catch (e) {}
 });
-// aparición al hacer scroll
+// aparición suave al hacer scroll
 if ('IntersectionObserver' in window) {
-  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.2 });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 } else { document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); }); }
 </script>
